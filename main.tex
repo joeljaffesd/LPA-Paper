@@ -32,8 +32,8 @@
 %------------------------------------------------------------------------------------------
 %  !  !  !  !  !  !  !  !  !  !  !  ! user defined variables  !  !  !  !  !  !  !  !  !  !  !  !  !  !
 % Please use these commands to define title and author(s) of the paper:
-\def\papertitle{Templates for LAC-25, Villeurbanne, France}
-\def\paperauthorA{Author One}
+\def\papertitle{The LPA Plugin: A Novel Audio Plugin Architecture and Development Ecosystem}
+\def\paperauthorA{Joel A. Jaffe}
 \def\paperauthorB{Author Two}
 \def\paperauthorC{Author Three}
 \def\paperauthorD{Author Four}
@@ -107,11 +107,12 @@
 \title{\papertitle}
 
 %-------------SINGLE-AUTHOR HEADER STARTS (uncomment below if your paper has a single author)-----------------------
-% \affiliation{
-% \paperauthorA \,\sthanks{This work was supported by the XYZ Foundation}}
-% {\href{https://ccrma.stanford.edu}{CCRMA} \\ Stanford University, USA \\
-% {\tt \href{mailto:lac@ccrma.stanford.edu}{lac@ccrma.stanford.edu}}
-% }
+\affiliation{
+\paperauthorA}
+{\href{https://www.mat.ucsb.edu/}{Department of Media Arts \& Technology} \\
+\href{https://www.ucsb.edu}{University of California Santa Barbara, USA} \\
+{\tt \href{mailto:joel@jaffesd.com}{joel@jaffesd.com}}
+}
 %-----------------------------------SINGLE-AUTHOR HEADER ENDS------------------------------------------------------
 
 %---------------TWO-AUTHOR HEADER STARTS (uncomment below if your paper has two authors)-----------------------
@@ -143,24 +144,24 @@
 %-------------------------------------THREE-AUTHOR HEADER ENDS------------------------------------------------------
 
 %----------------FOUR-AUTHOR HEADER STARTS (uncomment below if your paper has four authors)-----------------------
-\fouraffiliations{
-\paperauthorA \,\sthanks{This work was supported by the XYZ Foundation}}
-{\href{https://ccrma.stanford.edu}{CCRMA} \\ Stanford University, USA \\
-{\tt \href{mailto:lac@ccrma.stanford.edu}{lac@ccrma.stanford.edu}}
-}
-{\paperauthorB \,\sthanks{This guy is a very good fellow}}
-{\href{http://www.musikwissenschaft.uni-mainz.de/Musikinformatik/}{Johannes Gutenberg University (JGU)} \\  Mainz, Germany\\
-{\tt \href{mailto:lac@uni-mainz.de}{lac@uni-mainz.de}}
-}
-{\paperauthorC \,\sthanks{Illustrious contributor}}
-{\href{https://lmfa.ec-lyon.fr/}{LMFA} \\ Ecully, France \\
-{\tt \href{mailto:lac@ec-lyon.fr}{lac@ec-lyon.fr}}
-}
-{\paperauthorD \,\sthanks{Thanks to the predessors for the templates}}
-{\href{https://www.univ-st-etienne.fr}{Jean Monnet University (UJM)} \\
-Saint-Etienne, France \\
-{\tt \href{mailto:lac@univ-st-etienne.fr}{lac@univ-st-etienne.fr}}
-}
+% \fouraffiliations{
+% \paperauthorA \,\sthanks{This work was supported by the XYZ Foundation}}
+% {\href{https://ccrma.stanford.edu}{CCRMA} \\ Stanford University, USA \\
+% {\tt \href{mailto:lac@ccrma.stanford.edu}{lac@ccrma.stanford.edu}}
+% }
+% {\paperauthorB \,\sthanks{This guy is a very good fellow}}
+% {\href{http://www.musikwissenschaft.uni-mainz.de/Musikinformatik/}{Johannes Gutenberg University (JGU)} \\  Mainz, Germany\\
+% {\tt \href{mailto:lac@uni-mainz.de}{lac@uni-mainz.de}}
+% }
+% {\paperauthorC \,\sthanks{Illustrious contributor}}
+% {\href{https://lmfa.ec-lyon.fr/}{LMFA} \\ Ecully, France \\
+% {\tt \href{mailto:lac@ec-lyon.fr}{lac@ec-lyon.fr}}
+% }
+% {\paperauthorD \,\sthanks{Thanks to the predessors for the templates}}
+% {\href{https://www.univ-st-etienne.fr}{Jean Monnet University (UJM)} \\
+% Saint-Etienne, France \\
+% {\tt \href{mailto:lac@univ-st-etienne.fr}{lac@univ-st-etienne.fr}}
+% }
 %-------------------------------------FOUR-AUTHOR HEADER ENDS------------------------------------------------------
 
 \begin{document}
@@ -174,13 +175,10 @@ Saint-Etienne, France \\
 \maketitle
 
 \begin{abstract}
-This is the template file for the proceedings of the 19$^{\text{th}}$ 
-Linux Audio Conference (LAC-25).
-This template has been derived from DAFx-16 and IFC-18 templates and aims at 
-producing conference proceedings in electronic form.
-The format is essentially the one used for ICASSP conferences. Please use
-this \LaTeX{} format when preparing your
-submission.
+This paper introduces a novel plugin architecture, the LPA (Light\-weight Plugin Architecture) plugin. 
+The development of such an architecture is motivated by the expansive, duplicitous scope of existing audio plugin architectures, which are narrowly focused on deployment in Digital Audio Workstation software. 
+In contrast, the LPA plugin is designed to run in the widest possible variety of contexts, from bare-metal embedded systems to the web and everything between. 
+This is achieved by limiting the scope of the architecture to strictly perform DSP and provide basic control- no GUI, networking, licensing or other “accoutrement” tooling found in traditional plugin architectures.
 \end{abstract}
 
 \section{Introduction}
