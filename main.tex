@@ -185,30 +185,21 @@ This is achieved by limiting the scope of the architecture to strictly perform D
 \label{sec:intro}
 
 The term "audio plugin" in 2025[], for those who have some association with it, mostly denotes a binary executable designed to run inside DAW software. 
-More broadly, the term audio plugin can describe any audio-focused program designed to operate inside a host application, which does not necessarily have to be audio specific. 
-Examples include audio plugins for software 3D and animation software such as Blender[], game engines such as Unity[] and Unreal[], and even the browser[]. 
+More broadly, the term audio plugin can describe any audio-focused program designed to operate inside a host application of any kind. 
+Examples include audio plugins for 3D modeling and animation software such as Blender[], game engines such as Unity[] and Unreal[], and the browser[]. 
 Given that these plugins all operate on the same core data structures, it is both possible and desirable to maintain audio DSP codebases that can deploy to multiple of these plugin formats, as well as standalone applications, from the same source code.
 
-The concept of "write once, run anywhere" (WORA) transcends the audio DSP realm, of course. 
+This concept of "write once, run anywhere" (WORA) transcends the audio DSP realm, of course. 
 Notably, it was a slogan for the Java[] programming language when it was introduced in 1995, and the explosion of Web based technologies can be seen as a direct descendent. 
 In the audio DSP world, different approaches to WORA can be broadly categorized as being one of two types.
 
-has mainly been seen in the case of domain-specific languages and runtimes.
 
-
-One approach is 
-
-tool oriented towards this is FAUST[], a domain-specific programming language for real-time DSP. FAUST affords the programmer the ability to define audio processing without having to manually manage memory, and to target multiple different deployments from the same code. The downside of the bargain is that the programmer must learn Faust.
-
-Note: Figure 17 of "FAUST Domain Specific Audio DSP Language Compiled to WebAssembly" shows the performance of FAUST->C->emcc->wasm roughly equal to FAUST->wasm.
-
-A node-oriented option is Gen\~~. Gen\~~ affords the ability to create efficient, low-level[] audio processing without having to write code at all, yet also exposes a textual code interface for advanced users. Like FAUST, Gen also deploys to many targets, by generating code.
-
+One approach is that of the domain specific programming language (DSL). 
+The fundamental philosophy of these languages, as well as their broader ecosystems, revolves around QUOTE SOMEONE ELSE[]. 
 A downside of these DSL approaches is that they constrain the programmer to writing traditional DSP code, being poor choices for implementing modern techniques, such as neural audio inference engines[].
 
-A language-agnostic tool would be great.
-
-The definition of this is found in an audio plugin standard as defined in DAWS: a piece of executable binary[] that can have come from any, including multiple, programming language(s).
+A language-agnostic tool would be great. Popular audio plugin standards actually support this in their definition as a piece of executable binary[] that can have come from any, including multiple, programming language(s).
+That being said, pretty much everyone uses C++ with the JUCE[] framework. So it goes.
 
 \section{Related Work}
 \label{ssec:Related Work}
@@ -235,12 +226,27 @@ Sec. \ref{ssec:figures}.}}
 \end{figure*}
 
 \subsection{Domain-Specific Programming for Audio DSP (FAUST and Gen\~~)}
-\subsection{Gen~}
+FAUST[], a domain specific programming language for real-time DSP. 
+FAUST affords the programmer the ability to define audio processing without having to manually manage memory, and to target multiple different deployments from the same code. 
+The downside of the bargain is that the programmer must learn Faust.
+
+Note: Figure 17 of "FAUST Domain Specific Audio DSP Language Compiled to WebAssembly" shows the performance of FAUST->C->emcc->wasm roughly equal to FAUST->wasm.
+
+A node-oriented option is Gen\~~. 
+Gen\~~ affords the ability to create efficient, low-level[] audio processing without having to write code at all, yet also exposes a textual code interface for advanced users. 
+Like FAUST, Gen also deploys to many targets, by generating code.
+
+\subsection{Audio Plugin Standards}
 \subsection{Cool Third Thing}
+
 \section{The LPA Standard}
+
 \section{Developer Tooling}
+
 \section{Evaluation}
+
 \section{Conclusion}
+
 \section{Acknowledgments}
 
 As for figures, all tables should be centered on the column (or page, if the
