@@ -31,23 +31,48 @@ jobs:
         name: lac-template-pdf
         path: main.pdf
 
+    - name: Get next version
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      id: version
+      run: |
+        # Reset to semantic versioning starting from 0.0.1
+        # Get the latest semantic version tag (v*.*.*)
+        LATEST_TAG=$(git tag -l "v*.*.*" --sort=-version:refname | head -n1)
+        if [ -z "$LATEST_TAG" ]; then
+          # Start fresh with 0.0.1
+          NEW_VERSION="0.0.1"
+        else
+          # Extract version numbers
+          VERSION=${LATEST_TAG#v}
+          MAJOR=$(echo $VERSION | cut -d. -f1)
+          MINOR=$(echo $VERSION | cut -d. -f2)
+          PATCH=$(echo $VERSION | cut -d. -f3)
+          
+          # Increment minor version, reset patch to 0
+          NEW_MINOR=$((MINOR + 1))
+          NEW_VERSION="$MAJOR.$NEW_MINOR.0"
+        fi
+        echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+        echo "Next version will be: v$NEW_VERSION"
+
     - name: Create Release
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: v${{ github.run_number }}
-        name: LAC Template v${{ github.run_number }}
+        tag_name: v${{ steps.version.outputs.version }}
+        name: LPA-Paper-Draft v${{ steps.version.outputs.version }}
         body: |
-          Automatically generated LAC-25 template PDF from commit ${{ github.sha }}.
+          Automatically generated PDF from commit ${{ github.sha }}.
           
-          This release contains the compiled PDF of the LAC-25 paper template.
+          This release contains the compiled PDF of the current working draft of my paper.
           
           ## Changes
           - Built from commit: ${{ github.sha }}
           - Build date: ${{ github.event.head_commit.timestamp }}
+          - Version: v${{ steps.version.outputs.version }}
           
           ## Usage
-          Download the PDF to see the formatted template output, or use the source code to create your own LAC-25 paper.
+          Download the PDF to see the formatted template output, or use the source code to open in a LaTeX editor.
         files: main.pdf
         draft: false
         prerelease: false
