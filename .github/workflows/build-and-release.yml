@@ -48,9 +48,9 @@ jobs:
           MINOR=$(echo $VERSION | cut -d. -f2)
           PATCH=$(echo $VERSION | cut -d. -f3)
           
-          # Increment patch version (0.0.1 -> 0.0.2 -> 0.0.3, etc.)
-          NEW_PATCH=$((PATCH + 1))
-          NEW_VERSION="$MAJOR.$MINOR.$NEW_PATCH"
+          # Increment minor version, reset patch to 0
+          NEW_MINOR=$((MINOR + 1))
+          NEW_VERSION="$MAJOR.$NEW_MINOR.0"
         fi
         echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
         echo "Next version will be: v$NEW_VERSION"
