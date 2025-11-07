@@ -32,8 +32,12 @@
 %------------------------------------------------------------------------------------------
 %  !  !  !  !  !  !  !  !  !  !  !  ! user defined variables  !  !  !  !  !  !  !  !  !  !  !  !  !  !
 % Please use these commands to define title and author(s) of the paper:
-\def\papertitle{The LPA Plugin: \\ A Novel Audio Plugin Architecture \\ and Development Ecosystem}
-\def\paperauthorA{Joel A. Jaffe}
+\def\papertitle { 
+  The LPA Plugin: \\ 
+  An Open-Source Audio Plugin Architecture \\ 
+  and Development Ecosystem
+}
+\def\paperauthorA{ Joel A. Jaffe }
 \def\paperauthorB{Author Two}
 \def\paperauthorC{Author Three}
 \def\paperauthorD{Author Four}
@@ -175,34 +179,75 @@
 \maketitle
 
 \begin{abstract}
-This paper introduces a novel plugin architecture, the LPA (Light-weight Plugin Architecture) plugin. 
-The development of such an architecture is motivated by the expansive, duplicitous scope of existing audio plugin architectures, which are narrowly focused on deployment in DAW[] software. 
-In contrast, the LPA plugin is designed to run in the widest possible variety of contexts, from bare-metal embedded systems to the Web, and everything between, while remaining language agnostic.
-This is achieved by limiting the scope of the architecture to strictly perform DSP[] and provide basic parameterized control.
+
+This paper introduces a novel plugin architecture, 
+the LPA (Light-weight Plugin Architecture) plugin.
+Designed as a subset of existing plugin architectures, 
+the LPA format and development ecosystem 
+seek to provide an easy entry point for 
+developing and maintaining audio DSP codebases 
+that can deploy to a wide range of targets, 
+including bare-metal embedded systems,  
+cross-platform native audio plugins, and web audio modules.
 \end{abstract}
 
 \section{Introduction}
 \label{sec:intro}
 
-The term "audio plugin" in 2025[], for those who have some association with it, mostly denotes a binary executable designed to run inside DAW software. 
-More broadly, the term audio plugin can describe any audio-focused program designed to operate inside a host application of any kind. 
-Examples include audio plugins for 3D modeling and animation software such as Blender[], game engines such as Unity[] and Unreal[], and the browser[]. 
-Given that these plugins all operate on the same core data structures, it is both possible and desirable to maintain audio DSP codebases that can deploy to multiple of these plugin formats, as well as standalone applications, from the same source code.
+The landscape of audio software development in 2025 is a notably diverse one.
+Targets include:
 
-This concept of "write once, run anywhere" (WORA) transcends the audio DSP realm, of course. 
-Notably, it was a slogan for the Java[] programming language when it was introduced in 1995, and the explosion of Web based technologies can be seen as a direct descendent. 
-In the audio DSP world, different approaches to WORA can be broadly categorized as being one of two types.
+\begin{itemize}
+\item native standalone applications spanning 
+various operating systems and computer architectures
+\item numerous native plugin architectures, 
+targeting both DAWs and game engines (VST, AUv3, LV2)
+\item web audio
+\item embedded systems
+\item mobile applications
+\end{itemize}
+
+In order to facilitate deployment to multiple of these targets 
+from a single codebase,
+\textit{intermediary plugin frameworks} 
+such as JUCE and iPlug are typically used\cite{2018_13}.
+Some text about how f**king complicated these are to use.
+
+Efforts have been made to provide alternative strategies 
+to audio developers. 
+
+One approach is that of domain-specific languages 
+for audio programming, with CSound, FAUST, and CMajor
+being the most notable examples. 
+The primary advantage of these languages is that they 
+enable the developer to focus strictly on audio processing
+code, without handling memory management etc.
+A downside is that the require programmers to learn
+a new language, and that they may constrain the developer 
+to a particular paradigm of signal processing.
 
 
 One approach is that of the domain specific programming language (DSL). 
-The fundamental philosophy of these languages, as well as their broader ecosystems, revolves around QUOTE SOMEONE ELSE[]. 
-A downside of these DSL approaches is that they constrain the programmer to writing traditional DSP code, being poor choices for implementing modern techniques, such as neural audio inference engines[].
+The fundamental philosophy of these languages, 
+as well as their broader ecosystems, 
+revolves around QUOTE SOMEONE ELSE[]. 
+A downside of these DSL approaches is 
+that they constrain the programmer 
+to writing traditional DSP code, 
+being poor choices for implementing modern techniques, 
+such as neural audio inference engines[].
 
-A language-agnostic tool would be great. Popular audio plugin standards actually support this in their definition as a piece of executable binary[] that can have come from any, including multiple, programming language(s).
-That being said, pretty much everyone uses C++ with the JUCE[] framework. So it goes.
+A language-agnostic tool would be great. 
+Popular audio plugin standards actually support this in their definition 
+as a piece of executable binary[] that can have come from any, 
+including multiple, programming language(s).
+That being said, pretty much everyone uses C++ with the JUCE[] framework.
+So it goes.
 
 \section{Related Work}
 \label{ssec:Related Work}
+
+NOTE: VST SDK RELEASED OPEN SOURCE w/ MIT
 
 All figures should be centered on the column (or page, if the figure spans both
 columns). Figure captions (in italic) should follow each figure and have the
@@ -314,7 +359,7 @@ Page numbers will be added to the document in the post-processing stage, so
 
 \subsection{References}
 
-The references will be numbered in order of appearance \cite{Sal89},
+The references will be numbered in order of appearance \cite{2018_13},
 \cite{Spa72}, \cite{MosWal64} and \cite{Kay86}. Please avoid listing
 references that do not appear in the text.
 
