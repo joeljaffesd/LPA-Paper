@@ -181,7 +181,7 @@
 \begin{abstract}
 
 This paper introduces a novel plugin architecture, 
-the LPA (Light-weight Plugin Architecture) plugin.
+the LPA (Lightweight Plugin Architecture) plugin.
 Designed as a subset of existing plugin architectures, 
 the LPA format and development ecosystem 
 seek to provide an easy entry point for 
@@ -211,27 +211,21 @@ In order to facilitate deployment to multiple of these targets
 from a single codebase,
 \textit{intermediary plugin frameworks} 
 such as JUCE and iPlug are typically used\cite{2018_13}.
-Some text about how f**king complicated these are to use.
 
 Efforts have been made to provide alternative strategies 
 to audio developers. 
 
-One approach is that of domain-specific languages 
+One approach is that of the domain-specific language (DSL)
 for audio programming, with CSound, FAUST, and CMajor
 being the most notable examples. 
 The primary advantage of these languages is that they 
 enable the developer to focus strictly on audio processing
 code, without handling memory management etc.
-A downside is that the require programmers to learn
+A downside is that they require programmers to learn
 a new language, and that they may constrain the developer 
 to a particular paradigm of signal processing.
 
-
-One approach is that of the domain specific programming language (DSL). 
-The fundamental philosophy of these languages, 
-as well as their broader ecosystems, 
-revolves around QUOTE SOMEONE ELSE[]. 
-A downside of these DSL approaches is 
+A downside of the DSL approach is 
 that they constrain the programmer 
 to writing traditional DSP code, 
 being poor choices for implementing modern techniques, 
@@ -246,8 +240,6 @@ So it goes.
 
 \section{Related Work}
 \label{ssec:Related Work}
-
-NOTE: VST SDK RELEASED OPEN SOURCE w/ MIT
 
 All figures should be centered on the column (or page, if the figure spans both
 columns). Figure captions (in italic) should follow each figure and have the
@@ -287,6 +279,19 @@ Like FAUST, Gen also deploys to many targets, by generating code.
 \section{The LPA Standard}
 
 \section{Developer Tooling}
+
+The LPA SDK contains:
+
+\begin{itemize}
+\item An ABI definition written in C
+\item A lightweight host that can run as a standalone application
+or be embedded into other apps
+\item An online registry of LPA plugins
+\cite{10.1145/3487553.3524225}
+\item A GitHub template repository for writing and validating LPAs
+\item A web editor for writing LPAs 
+\end{itemize}
+
 
 \section{Evaluation}
 
