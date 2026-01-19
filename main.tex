@@ -180,18 +180,22 @@
 
 \begin{abstract}
 
-This paper introduces a novel plugin architecture, 
-the LPA (Lightweight Plugin Architecture) plugin.
-Designed as a subset of existing plugin architectures, 
-the LPA format and development ecosystem 
-seek to provide an easy entry point for 
-developing and maintaining audio DSP codebases 
-that can deploy to a wide range of targets, 
-including bare-metal embedded systems,  
-cross-platform native audio plugins, and web audio modules.
+This paper explores the potential of WebAssembly 
+to serve as a single compile target for headless
+audio plugins, which can deploy to myriad environments.
+
+% This paper introduces a novel plugin architecture, 
+% the LPA (Lightweight Plugin Architecture) plugin.
+% Designed as a subset of existing plugin architectures, 
+% the LPA format and development ecosystem 
+% seek to provide an easy entry point for 
+% developing and maintaining audio DSP codebases 
+% that can deploy to a wide range of targets, 
+% including bare-metal embedded systems,  
+% cross-platform native audio plugins, and web audio modules.
 \end{abstract}
 
-\section{Introduction}
+\section{ Introduction }
 \label{sec:intro}
 
 The landscape of audio software development in 2025 is a notably diverse one.
@@ -238,7 +242,7 @@ including multiple, programming language(s).
 That being said, pretty much everyone uses C++ with the JUCE[] framework.
 So it goes.
 
-\section{Related Work}
+\section{ Related Work }
 \label{ssec:Related Work}
 
 All figures should be centered on the column (or page, if the figure spans both
@@ -262,7 +266,7 @@ columns.
 Sec. \ref{ssec:figures}.}}
 \end{figure*}
 
-\subsection{Domain-Specific Programming for Audio DSP (FAUST and Gen\~~)}
+\subsection{ Domain-Specific Programming for Audio DSP (FAUST and Gen\~~) }
 FAUST[], a domain specific programming language for real-time DSP. 
 FAUST affords the programmer the ability to define audio processing without having to manually manage memory, and to target multiple different deployments from the same code. 
 The downside of the bargain is that the programmer must learn Faust.
@@ -273,12 +277,12 @@ A node-oriented option is Gen\~~.
 Gen\~~ affords the ability to create efficient, low-level[] audio processing without having to write code at all, yet also exposes a textual code interface for advanced users. 
 Like FAUST, Gen also deploys to many targets, by generating code.
 
-\subsection{Audio Plugin Standards}
-\subsection{Cool Third Thing}
+\subsection{ Audio Plugin Standards }
+\subsection{ Cool Third Thing }
 
-\section{The LPA Standard}
+\section{ Methods }
 
-\section{Developer Tooling}
+\section{ Results }
 
 The LPA SDK contains:
 
@@ -293,11 +297,11 @@ or be embedded into other apps
 \end{itemize}
 
 
-\section{Evaluation}
+\section{ Evaluation }
 
-\section{Conclusion}
+\section{ Conclusion }
 
-\section{Acknowledgments}
+\section{ Acknowledgments }
 
 As for figures, all tables should be centered on the column (or page, if the
 table spans both columns). Table captions should be in italic, precede each
