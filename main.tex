@@ -194,7 +194,7 @@ with an emphasis on IoMusT applications.
 To investigate the feasibility of WebAssembly as a universal 
 distributable binary for heterogenous targets,
 four representative audio processing routines are 
-compiled to a WebAssembly with a consistent ABI, 
+compiled to WebAssembly with a consistent ABI, 
 and three methods are benchmarked for running 
 the programs on a resource contained target (Daisy Seed). 
 Preliminary results showcase that two of the methods provide 
@@ -284,6 +284,10 @@ that makes difficult many techniques.
 \section{ Related Work }
 \label{ssec:Related Work}
 
+Maybe mention Sonical.
+
+Definitely mention AudioReach.
+
 All figures should be centered on the column (or page, if the figure spans both
 columns). Figure captions (in italic) should follow each figure and have the
 format given in Figure~\ref{fft_plot}. Vectorial figures are preferred (e.g.,
@@ -307,13 +311,19 @@ Sec. \ref{ssec:figures}.}}
 
 \subsection{ Domain-Specific Programming for Audio DSP (FAUST and Gen\~~) }
 FAUST[], a domain specific programming language for real-time DSP. 
-FAUST affords the programmer the ability to define audio processing without having to manually manage memory, and to target multiple different deployments from the same code. 
+FAUST affords the programmer the ability to define audio processing 
+without having to manually manage memory, 
+and to target multiple different deployments from the same code. 
 The downside of the bargain is that the programmer must learn Faust.
 
-Note: Figure 17 of "FAUST Domain Specific Audio DSP Language Compiled to WebAssembly" shows the performance of FAUST->C->emcc->wasm roughly equal to FAUST->wasm.
+Note: Figure 17 of 
+"FAUST Domain Specific Audio DSP Language Compiled to WebAssembly" 
+shows the performance of FAUST->C->emcc->wasm roughly equal to FAUST->wasm.
 
 A node-oriented option is Gen\~~. 
-Gen\~~ affords the ability to create efficient, low-level[] audio processing without having to write code at all, yet also exposes a textual code interface for advanced users. 
+Gen\~~ affords the ability to create efficient, 
+low-level[] audio processing without having to write code at all, 
+yet also exposes a textual code interface for advanced users. 
 Like FAUST, Gen also deploys to many targets, by generating code.
 
 \subsection{ Audio Plugin Standards }
@@ -321,19 +331,62 @@ Like FAUST, Gen also deploys to many targets, by generating code.
 
 \section{ Methods }
 
-\section{ Results }
+To investigate the feasibility of WebAssembly as a universal 
+distributable binary for heterogenous targets,
+four representative audio processing routines are 
+compiled to WebAssembly with a consistent ABI, 
+and three methods are benchmarked for running 
+the programs on a resource contained target (Daisy Seed). 
 
-The LPA SDK contains:
+The Daisy Seed is a widely popular embedded platform, 
+similar to the Arduino ecosystem but with a focus on
+audio. It is available in both development and manufacturer 
+oriented packages, making it a popular choice across hobbyist, 
+education, and industry use cases. 
+It supports 32-but processing at a 480MHz clock rate
+and can be programmed from various languages.
+
+To benchmark the performance of compiled WebAssembly plugins,
+four audio processing algorithms are compiled to both WebAssembly
+and native ARM binary, and their processing speeds are compared.
+
+The algorithms are:
 
 \begin{itemize}
-\item An ABI definition written in C
-\item A lightweight host that can run as a standalone application
-or be embedded into other apps
-\item An online registry of LPA plugins
-\cite{10.1145/3487553.3524225}
-\item A GitHub template repository for writing and validating LPAs
-\item A web editor for writing LPAs 
+  \item A FAUST spring reverb exported to C++
+  \item An lightweight implementation of Neural Amp Modeler
+  \item A virtual analog model of a Klon Centaur overdrive circuit using WDFs
+  \item A fourth thing I haven't decided on yet
 \end{itemize}
+
+Four WebAssembly runtimes are compared. 
+The runtimes are:
+
+\begin{itemize}
+  \item Wasmi, a WebAssembly interpreter written in Rust
+  \item Web Assembly Micro Runtime,
+  \item De- and re- compilation of WebAssembly to C to native ARM binary
+\end{itemize}
+
+\section{ Results }
+
+Preliminary results:
+
+\begin{table}[ht]
+\caption{Performance comparison of different runtimes.}
+\centering
+\begin{tabular}{|l|r|}
+\hline
+Runtime & Relative Performance \\
+\hline
+Native FAUST-exported C++ & 1.x (baseline) \\
+WAMR AOT runtime & 0.970x \\
+Wasm2c runtime & 0.852x \\
+Wasmi runtime & 0.081x \\
+\hline
+\end{tabular}
+\label{tab:performance}
+\end{table}
 
 
 \section{ Evaluation }
