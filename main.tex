@@ -180,67 +180,88 @@
 
 \begin{abstract}
 
-This paper explores the potential of WebAssembly 
-to serve as a single compile target for headless
-audio plugins, which can deploy to myriad environments.
-
-% This paper introduces a novel plugin architecture, 
-% the LPA (Lightweight Plugin Architecture) plugin.
-% Designed as a subset of existing plugin architectures, 
-% the LPA format and development ecosystem 
-% seek to provide an easy entry point for 
-% developing and maintaining audio DSP codebases 
-% that can deploy to a wide range of targets, 
-% including bare-metal embedded systems,  
-% cross-platform native audio plugins, and web audio modules.
+Originally developed to enhance the performance of web applications, 
+WebAssembly has gained recognition as a portable, 
+secure and efficient runtime environment[1] 
+that provides “write once, run anywhere” deployment 
+\& maintenance of software applications 
+in a large variety of programming languages[2]. 
+While research into WebAssembly-based audio plugins is mature[3][4][5], 
+prior work has mainly focused on their deployment in the browser. 
+This project explores the performance of WebAssembly audio plugins 
+deployed on a wider variety of targets, 
+with an emphasis on IoMusT[6] applications. 
 \end{abstract}
 
 \section{ Introduction }
 \label{sec:intro}
 
-The landscape of audio software development in 2025 is a notably diverse one.
+The landscape of audio software development in 2026 is a notably diverse one.
 Targets include:
 
 \begin{itemize}
 \item native standalone applications spanning 
 various operating systems and computer architectures
-\item numerous native plugin architectures, 
-targeting both DAWs and game engines (VST, AUv3, LV2)
+\item numerous audio plugin architectures, 
+targeting primarily DAWs and game engines (VST, AUv3, LV2)
 \item web audio
 \item embedded systems
 \item mobile applications
 \end{itemize}
 
-In order to facilitate deployment to multiple of these targets 
-from a single codebase,
-\textit{intermediary plugin frameworks} 
-such as JUCE and iPlug are typically used\cite{2018_13}.
+Interoperability between these different environments
+can be desirable from both end-user and developer perspectives.
+For users, interoperability allows for a portability of sounds 
+between use cases. In example, an electric instrumentalist 
+may want the same effects chain they use in a DAW to also be usable
+in a live performance context, ideally on hardware that is better 
+suited to that use case than a laptop. For developers, deployment
+to multiple targets from a single codebase and build system 
+enables easier development and maintenance of audio DSP code.
+
+In order to facilitate deployment to multiple of the 
+above mentioned targets from a single codebase,
+\textit{intermediary plugin frameworks} have become popular 
+among audio developers\cite{2018_13}. 
+
+The most notable of these frameworks is JUCE, 
+which has become the industry standard. 
+JUCE provides a C++ API by which audio processing
+and user interface code can be compiled for multiple targets, 
+including cross-platform standalone audio applications, 
+DAW \& game engine plugins, and mobile apps.
+
+An alternative intermediary plugin framework, iPlug2, 
+adds Web Audio as a target, and is liberally licensed, 
+but is also implemented as a C++ API.
 
 Efforts have been made to provide alternative strategies 
-to audio developers. 
+to audio developers that do not rely on C++ tooling. 
 
-One approach is that of the domain-specific language (DSL)
+One approach is that of textual domain-specific languages (DSL)
 for audio programming, with CSound, FAUST, and CMajor
 being the most notable examples. 
 The primary advantage of these languages is that they 
 enable the developer to focus strictly on audio processing
-code, without handling memory management etc.
+logic, without handling memory management etc.
 A downside is that they require programmers to learn
 a new language, and that they may constrain the developer 
 to a particular paradigm of signal processing.
 
-A downside of the DSL approach is 
-that they constrain the programmer 
-to writing traditional DSP code, 
-being poor choices for implementing modern techniques, 
-such as neural audio inference engines[].
+Another approach is visual programming languages for audio, 
+such as Max/MSP, Gen\~, and PureData. These languages
+work in a data flow paradigm using boxes (small programs) 
+connected by data flow lines, which mirrors the analog interface
+of signal processing device composition familiar to musicians and 
+sounds engineers. Like textual DSLs for audio, these languages
+are geared towards a particular paradigm of signal processing 
+that makes difficult many techniques.
 
-A language-agnostic tool would be great. 
-Popular audio plugin standards actually support this in their definition 
-as a piece of executable binary[] that can have come from any, 
-including multiple, programming language(s).
-That being said, pretty much everyone uses C++ with the JUCE[] framework.
-So it goes.
+% A downside of the DSL approach is 
+% that they constrain the programmer 
+% to writing traditional DSP code, 
+% being poor choices for implementing modern techniques, 
+% such as neural audio inference engines[].
 
 \section{ Related Work }
 \label{ssec:Related Work}
