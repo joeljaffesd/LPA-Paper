@@ -182,15 +182,35 @@
 
 Originally developed to enhance the performance of web applications, 
 WebAssembly has gained recognition as a portable, 
-secure and efficient runtime environment[1] 
-that provides “write once, run anywhere” deployment 
+secure and efficient runtime environment 
+that provides ``write once, run anywhere'' deployment 
 \& maintenance of software applications 
-in a large variety of programming languages[2]. 
-While research into WebAssembly-based audio plugins is mature[3][4][5], 
+in a large variety of programming languages. 
+While research into WebAssembly-based audio plugins is mature, 
 prior work has mainly focused on their deployment in the browser. 
 This project explores the performance of WebAssembly audio plugins 
 deployed on a wider variety of targets, 
-with an emphasis on IoMusT[6] applications. 
+with an emphasis on IoMusT applications. 
+To investigate the feasibility of WebAssembly as a universal 
+distributable binary for heterogenous targets,
+four representative audio processing routines are 
+compiled to a WebAssembly with a consistent ABI, 
+and three methods are benchmarked for running 
+the programs on a resource contained target (Daisy Seed). 
+Preliminary results showcase that two of the methods provide 
+performance tradeoffs acceptable for real-time processing,
+and that performance may be improved further by using 
+WebAssembly's ABI for importing math functions from plugin hosts.
+
+% Abstract must:
+% \begin{itemize}
+% \item describe general problem and why it is important.
+% \item describe your insights/opportunity to fix problem.
+% \item describe your approach/methods
+% \item describe your evaluation results
+% \item describe your contributions.
+% \end{itemize}
+
 \end{abstract}
 
 \section{ Introduction }
@@ -223,14 +243,12 @@ In order to facilitate deployment to multiple of the
 above mentioned targets from a single codebase,
 \textit{intermediary plugin frameworks} have become popular 
 among audio developers\cite{2018_13}. 
-
 The most notable of these frameworks is JUCE, 
 which has become the industry standard. 
 JUCE provides a C++ API by which audio processing
 and user interface code can be compiled for multiple targets, 
 including cross-platform standalone audio applications, 
 DAW \& game engine plugins, and mobile apps.
-
 An alternative intermediary plugin framework, iPlug2, 
 adds Web Audio as a target, and is liberally licensed, 
 but is also implemented as a C++ API.
