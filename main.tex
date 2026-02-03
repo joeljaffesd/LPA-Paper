@@ -50,6 +50,7 @@
 \usepackage{style/LAC-25}
 \usepackage[margin=2cm]{geometry}
 \usepackage{tikz}
+\usepackage{pgfplots}
 \usepackage{float}
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{euscript}
@@ -371,27 +372,6 @@ Maybe mention Sonical.
 
 Definitely mention AudioReach.
 
-All figures should be centered on the column (or page, if the figure spans both
-columns). Figure captions (in italic) should follow each figure and have the
-format given in Figure~\ref{fft_plot}. Vectorial figures are preferred (e.g.,
-Postscript, PDF, etc.). Also, in order to provide a better readability, figure
-text font size should be at least identical to footnote font size. If bitmap
-figures are used, please make sure that the resolution is enough for print
-quality. Figure~\ref{ftt_plot2} illustrates an example of a figure spanning two
-columns.
-
-\begin{figure}[ht]
-\centerline{\includegraphics[scale=0.5]{figures/ping}}
-\caption{\label{fft_plot}{\it Ping.}}
-\end{figure}
-
-\begin{figure*}[ht]
-\center
-\includegraphics[width=5in]{figures/TwoColumnSine2/TwoColumnSine2}
-\caption{\label{ftt_plot2}{\it A figure spanning two columns, as mentioned in
-Sec. \ref{ssec:figures}.}}
-\end{figure*}
-
 \subsection{ Domain-Specific Programming for Audio DSP (FAUST and Gen\~~) }
 FAUST[], a domain specific programming language for real-time DSP. 
 FAUST affords the programmer the ability to define audio processing 
@@ -417,16 +397,18 @@ Like FAUST, Gen also deploys to many targets, by generating code.
 To investigate the feasibility of WebAssembly as a universal 
 distributable binary for heterogenous targets,
 four representative audio processing routines are 
-compiled to WebAssembly with a consistent ABI, 
+compiled to WebAssembly with a 
+consistent binary interface, 
 and three methods are benchmarked for running 
-the programs on a resource contained target (Daisy Seed). 
+the programs on a resource contained target 
+(Daisy Seed). 
 
 The Daisy Seed is a widely popular embedded platform, 
 similar to the Arduino ecosystem but with a focus on
 audio. It is available in both development and manufacturer 
 oriented packages, making it a popular choice across hobbyist, 
 education, and industry use cases. 
-It supports 32-but processing at a 480MHz clock rate
+It supports 32-bit processing at a 480MHz clock rate
 and can be programmed from various languages.
 
 To benchmark the performance of compiled WebAssembly plugins,
@@ -456,20 +438,50 @@ The runtimes are:
 Preliminary results:
 
 \begin{table}[ht]
-\caption{Performance comparison of different runtimes.}
+\caption{\itshape Performance comparison 
+of different runtimes across algorithms.}
 \centering
-\begin{tabular}{|l|r|}
-\hline
-Runtime & Relative Performance \\
-\hline
-Native FAUST-exported C++ & 1.x (baseline) \\
-WAMR AOT runtime & 0.970x \\
-Wasm2c runtime & 0.852x \\
-Wasmi runtime & 0.081x \\
-\hline
+\begin{tabular}{|l|c|c|c|c|}
+  \hline
+  Algorithm & Native & WAMR AOT & Wasm2c & Wasmi \\
+  \hline
+  FAUST Spring Reverb & 1.0x & 0.970x & 0.852x & 0.081x \\
+Neural Amp Modeler & XX & XX & XX & XX \\
+Klon Centaur Overdrive & XX & XX & XX & XX \\
+Fourth Algorithm & XX & XX & XX & XX \\
+  \hline
 \end{tabular}
 \label{tab:performance}
 \end{table}
+
+\begin{figure*}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    bar width=0.67cm,
+    nodes near coords,
+    enlarge x limits=0.2,
+    ymin=0.0,
+    ylabel={Relative Performance},
+    xlabel={Runtime},
+    symbolic x coords={WAMR AOT, Wasm2c, Wasmi},
+    xtick=data,
+    legend style={at={(0.5, -0.15)},anchor=north},
+    legend columns=2,
+    width=\textwidth,
+    height=0.8\textwidth,
+]
+\addplot coordinates {(WAMR AOT,0.97) (Wasm2c,0.852) (Wasmi,0.081)};
+\addplot coordinates {(WAMR AOT,0.85) (Wasm2c,0.72) (Wasmi,0.03)};
+\addplot coordinates {(WAMR AOT,0.92) (Wasm2c,0.81) (Wasmi,0.06)};
+\addplot coordinates {(WAMR AOT,0.89) (Wasm2c,0.78) (Wasmi,0.05)};
+\legend{FAUST Spring Reverb, Neural Amp Modeler, Klon Centaur Overdrive, Fourth Algorithm}
+\end{axis}
+\end{tikzpicture}
+\caption{Bar graph of performance comparison 
+for all algorithms, with dummy data for now.}
+\end{figure*}
 
 
 \section{ Evaluation }
@@ -477,6 +489,27 @@ Wasmi runtime & 0.081x \\
 \section{ Conclusion }
 
 \section{ Acknowledgments }
+
+All figures should be centered on the column (or page, if the figure spans both
+columns). Figure captions (in italic) should follow each figure and have the
+format given in Figure~\ref{fft_plot}. Vectorial figures are preferred (e.g.,
+Postscript, PDF, etc.). Also, in order to provide a better readability, figure
+text font size should be at least identical to footnote font size. If bitmap
+figures are used, please make sure that the resolution is enough for print
+quality. Figure~\ref{ftt_plot2} illustrates an example of a figure spanning two
+columns.
+
+\begin{figure}[ht]
+\centerline{\includegraphics[scale=0.5]{figures/ping}}
+\caption{\label{fft_plot}{\it Ping.}}
+\end{figure}
+
+\begin{figure*}[ht]
+\center
+\includegraphics[width=5in]{figures/TwoColumnSine2/TwoColumnSine2}
+\caption{\label{ftt_plot2}{\it A figure spanning two columns, as mentioned in
+Sec. \ref{ssec:figures}.}}
+\end{figure*}
 
 As for figures, all tables should be centered on the column (or page, if the
 table spans both columns). Table captions should be in italic, precede each
