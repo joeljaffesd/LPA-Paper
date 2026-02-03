@@ -49,6 +49,8 @@
 
 \usepackage{style/LAC-25}
 \usepackage[margin=2cm]{geometry}
+\usepackage{tikz}
+\usepackage{float}
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{euscript}
 \usepackage[utf8]{inputenc}
@@ -95,7 +97,7 @@
     pdfstartview=XYZ % start with zoom=100% instead of full screen; especially useful if working with a big screen :-)
   ]{hyperref}
   \pdfcompresslevel=9
-  \usepackage[pdftex]{graphicx}
+  \usepackage{graphicx}
   \usepackage[figure,table]{hypcap}
 \else % compiling with latex
   \usepackage[dvips]{epsfig,graphicx}
@@ -194,13 +196,13 @@ with an emphasis on IoMusT applications.
 To investigate the feasibility of WebAssembly as a universal 
 distributable binary for heterogenous targets,
 four representative audio processing routines are 
-compiled to WebAssembly with a consistent ABI, 
+compiled to WebAssembly with a consistent binary interface, 
 and three methods are benchmarked for running 
 the programs on a resource contained target (Daisy Seed). 
 Preliminary results showcase that two of the methods provide 
 performance tradeoffs acceptable for real-time processing,
 and that performance may be improved further by using 
-WebAssembly's ABI for importing math functions from plugin hosts.
+WebAssembly's capabilities for importing math functions from plugin hosts.
 
 % Abstract must:
 % \begin{itemize}
@@ -216,11 +218,11 @@ WebAssembly's ABI for importing math functions from plugin hosts.
 \section{ Introduction }
 \label{sec:intro}
 
-The landscape of audio software development in 2026 is a notably diverse one.
+The landscape of audio software in 2026 is a notably diverse one.
 Targets include:
 
 \begin{itemize}
-\item native standalone applications spanning 
+\item standalone applications spanning 
 various operating systems and computer architectures
 \item numerous audio plugin architectures, 
 targeting primarily DAWs and game engines (VST, AUv3, LV2)
@@ -234,8 +236,8 @@ can be desirable from both end-user and developer perspectives.
 For users, interoperability allows for a portability of sounds 
 between use cases. In example, an electric instrumentalist 
 may want the same effects chain they use in a DAW to also be usable
-in a live performance context, ideally on hardware that is better 
-suited to that use case than a laptop. For developers, deployment
+in a live performance context, ideally on hardware that is tailored 
+to that environment. For developers, deployment
 to multiple targets from a single codebase and build system 
 enables easier development and maintenance of audio DSP code.
 
@@ -245,41 +247,122 @@ above mentioned targets from a single codebase,
 among audio developers\cite{2018_13}. 
 The most notable of these frameworks is JUCE, 
 which has become the industry standard. 
-JUCE provides a C++ API by which audio processing
+JUCE provides a C++ API by which the same audio processing
 and user interface code can be compiled for multiple targets, 
 including cross-platform standalone audio applications, 
-DAW \& game engine plugins, and mobile apps.
+DAW \& game engine plugins, and mobile applications.
 An alternative intermediary plugin framework, iPlug2, 
 adds Web Audio as a target, and is liberally licensed, 
 but is also implemented as a C++ API.
 
 Efforts have been made to provide alternative strategies 
-to audio developers that do not rely on C++ tooling. 
+to audio developers that do not rely on C++ tooling, 
+and can target a wider variety of environments.
 
 One approach is that of textual domain-specific languages (DSL)
 for audio programming, with CSound, FAUST, and CMajor
 being the most notable examples. 
 The primary advantage of these languages is that they 
 enable the developer to focus strictly on audio processing
-logic, without handling memory management etc.
-A downside is that they require programmers to learn
+logic, without handling memory management 
+and other low-level programming tasks.
+They also often have the ability to target multiple
+deployment environments by exporting generated code.
+Some downsides are that they require programmers to learn
 a new language, and that they may constrain the developer 
 to a particular paradigm of signal processing.
 
 Another approach is visual programming languages for audio, 
 such as Max/MSP, Gen\~, and PureData. These languages
 work in a data flow paradigm using boxes (small programs) 
-connected by data flow lines, which mirrors the analog interface
-of signal processing device composition familiar to musicians and 
+connected by data flow lines, an interface that mirrors 
+the composition of hardware signal processing devices
+via patch cables, which is often familiar to musicians and 
 sounds engineers. Like textual DSLs for audio, these languages
 are geared towards a particular paradigm of signal processing 
-that makes difficult many techniques.
+that makes difficult many techniques developed in recent years,
+such as neural audio inference engines. Like textual DSLs for audio,
+these visual languages are often also capable of 
+exporting code to multiple targets.
 
-% A downside of the DSL approach is 
-% that they constrain the programmer 
-% to writing traditional DSP code, 
-% being poor choices for implementing modern techniques, 
-% such as neural audio inference engines[].
+In the case of both textual DSLs and visual programming languages,
+their ability to target multiple deployment environments may be visualized
+as seen in Figure~\ref{fig1}. They are a single-input, multiple output systems.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\node[draw,rectangle] (dsl) at (0,0) {Audio DSL};
+\node[draw,rectangle] (t1) at (3,1) {Target 1};
+\node[draw,rectangle] (t2) at (3,0) {Target 2};
+\node[draw,rectangle] (t3) at (3,-1) {Target 3};
+\draw[->] (dsl) -- (t1);
+\draw[->] (dsl) -- (t2);
+\draw[->] (dsl) -- (t3);
+\end{tikzpicture}
+\caption{\label{fig1}{\it Graphical representation
+of an audio DSL targeting multiple 
+deployment environments.}}
+\end{figure}
+
+A more flexible approach is a solution that can receive input
+in the form of source code from myriad programming languages,
+and also target multiple deployment environments. 
+Traditionally this may look like Figure~\ref{fig2}, 
+depicting how each programming language must have its own
+toolchain to target each deployment environment. 
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\node[draw,rectangle] (l1) at (0,1) {Language 1};
+\node[draw,rectangle] (l2) at (0,0) {Language 2};
+\node[draw,rectangle] (l3) at (0,-1) {Language 3};
+\node[draw,rectangle] (t1) at (3,1) {Target 1};
+\node[draw,rectangle] (t2) at (3,0) {Target 2};
+\node[draw,rectangle] (t3) at (3,-1) {Target 3};
+\foreach \i in {1,2,3} {
+\foreach \j in {1,2,3} {
+\draw[->] (l\i) -- (t\j);
+}
+}
+\end{tikzpicture}
+\caption{\label{fig2}{\it Graphical representation 
+of per-language, per-target toolchains.}}
+\end{figure}
+
+By utilizing an intermediate representation,
+the complexity of this system may be reduced.
+A single runtime for the intermediate format on any target
+enables all programming languages that can compile to the
+representation to immediately target that environment.
+Conversely, any programming language that can compile to the
+intermediate representation may target any environment that
+has a runtime for that representation. 
+This is visualized in Figure~\ref{fig3}.
+
+\begin{figure}[H]
+\center
+\begin{tikzpicture}
+\node[draw,rectangle] (l1) at (0,1) {Language 1};
+\node[draw,rectangle] (l2) at (0,0) {Language 2};
+\node[draw,rectangle] (l3) at (0,-1) {Language 3};
+\node[draw,rectangle] (ir) at (3,0) {Intermediate Representation};
+\node[draw,rectangle] (t1) at (6,1) {Target 1};
+\node[draw,rectangle] (t2) at (6,0) {Target 2};
+\node[draw,rectangle] (t3) at (6,-1) {Target 3};
+\draw[->] (l1) -- (ir);
+\draw[->] (l2) -- (ir);
+\draw[->] (l3) -- (ir);
+\draw[->] (ir) -- (t1);
+\draw[->] (ir) -- (t2);
+\draw[->] (ir) -- (t3);
+\end{tikzpicture}
+\caption{\label{fig3}{\it Graphical representation
+of multiple languages targeting an 
+intermediate representation, 
+which supports multiple targets.}}
+\end{figure}
 
 \section{ Related Work }
 \label{ssec:Related Work}
