@@ -200,7 +200,7 @@ four representative audio processing routines are
 compiled to WebAssembly with a consistent binary interface, 
 and three methods are benchmarked for running 
 the programs on a resource contained target (Daisy Seed). 
-Preliminary results showcase that two of the methods provide 
+Preliminary results show that two of the methods provide 
 performance tradeoffs acceptable for real-time processing,
 and that performance may be improved further by using 
 WebAssembly's capabilities for importing math functions from plugin hosts.
@@ -218,77 +218,37 @@ WebAssembly's capabilities for importing math functions from plugin hosts.
 
 \section{ Introduction }
 \label{sec:intro}
+%Things the intro needs to have- ideally in this order
+%General State of the world
+%problem? What is wrong with the general state of the world?
+%optional but useful- Insight
+%Approach- what are you doing to address this problem AND why is this reasonable?
+%Relation to prior work- how does your approach differ from/ build on what has already been done- this estabilshes both novelty and relevance.
+%Evaluation/ results- what did you do to demonstrate your approach shows promise (in brief)
+%Implications- what are the broader implications of the results
+%explicit statement of contributions
 
-The landscape of audio software in 2026 is a notably diverse one.
-Targets include:
-
-\begin{itemize}
-\item standalone applications spanning 
-various operating systems and computer architectures
-\item numerous audio plugin architectures, 
-targeting primarily DAWs and game engines (VST, AUv3, LV2)
-\item web audio
-\item embedded systems
-\item mobile applications
-\end{itemize}
+The landscape of audio software in 2026 is diverse. Targets include standalone applications spanning various operating systems and computer architectures, numerous audio plugin standards for digital audio workstations (DAWs) & game engines, web audio, embedded systems, and mobile applications.
 
 Interoperability between these different environments
-can be desirable from both end-user and developer perspectives.
-For users, interoperability allows for a portability of sounds 
-between use cases. In example, an electric instrumentalist 
-may want the same effects chain they use in a DAW to also be usable
-in a live performance context, ideally on hardware that is tailored 
+is desirable from both end-user and developer perspectives.
+For users, interoperability allows for a portability of sound between use cases. For example, an electric instrumentalist may want the same effect processing they use in a DAW to also be usable in a live performance context, ideally on hardware that is tailored 
 to that environment. For developers, deployment
-to multiple targets from a single codebase and build system 
-enables easier development and maintenance of audio DSP code.
+to multiple targets from a single codebase and build system enables easier development and maintenance of audio processing code.
 
-In order to facilitate deployment to multiple of the 
-above mentioned targets from a single codebase,
-\textit{intermediary plugin frameworks} have become popular 
-among audio developers\cite{2018_13}. 
-The most notable of these frameworks is JUCE, 
-which has become the industry standard. 
-JUCE provides a C++ API by which the same audio processing
-and user interface code can be compiled for multiple targets, 
-including cross-platform standalone audio applications, 
-DAW \& game engine plugins, and mobile applications.
-An alternative intermediary plugin framework, iPlug2, 
-adds Web Audio as a target, and is liberally licensed, 
-but is also implemented as a C++ API.
+In order to facilitate deployment to multiple targets from a single codebase, \textit{intermediary plugin frameworks} have become popular among audio developers\cite{2018_13}. The most widely used of these frameworks is JUCE, which has become the industry standard. JUCE provides a C++ API by which the same audio processing and user interface code can be compiled for multiple targets, including cross-platform standalone audio applications, DAW \& game engine plugins, and mobile applications. An alternative intermediary plugin framework, iPlug2, adds Web Audio as a target, and is liberally licensed, but is also implemented as a C++ API. Although both JUCE and iPlug2 provide the ability to address multiple targets from a single codebase, they still require separate compilation and binary distribution for each platform. 
 
 Efforts have been made to provide alternative strategies 
-to audio developers that do not rely on C++ tooling, 
+to audio developers that do not rely on C++ tooling 
 and can target a wider variety of environments.
 
-One approach is that of textual domain-specific languages (DSL)
-for audio programming, with CSound, FAUST, and CMajor
-being the most notable examples. 
-The primary advantage of these languages is that they 
-enable the developer to focus strictly on audio processing
-logic, without handling memory management 
-and other low-level programming tasks.
-They also often have the ability to target multiple
-deployment environments by exporting generated code.
-Some downsides are that they require programmers to learn
-a new language, and that they may constrain the developer 
-to a particular paradigm of signal processing.
+One approach is that of textual domain-specific languages (DSL) for audio programming, with CSound, FAUST, and CMajor being the most notable examples. The primary advantage of these languages is that they enable the developer to focus strictly on audio processing logic, without handling memory management and other low-level programming tasks. They also often have the ability to target multiple deployment environments by exporting generated code. Some downsides are that they require programmers to learn a new language, and that they may constrain the developer to a particular paradigm of signal processing.
 
-Another approach is visual programming languages for audio, 
-such as Max/MSP, Gen\~, and PureData. These languages
-work in a data flow paradigm using boxes (small programs) 
-connected by data flow lines, an interface that mirrors 
-the composition of hardware signal processing devices
-via patch cables, which is often familiar to musicians and 
-sounds engineers. Like textual DSLs for audio, these languages
-are geared towards a particular paradigm of signal processing 
-that makes difficult many techniques developed in recent years,
-such as neural audio inference engines. Like textual DSLs for audio,
+Another approach is visual programming languages for audio, such as Max/MSP, Gen\~~, and PureData. These languages work in a data flow paradigm using boxes (small programs) connected by data flow lines, an interface that mirrors the composition of hardware signal processing devices via patch cables, which is often familiar to musicians and sound engineers. Like textual DSLs for audio, these languages are geared towards a particular paradigm of signal processing that makes difficult many techniques developed in recent years, such as neural audio inference engines. Like textual DSLs for audio,
 these visual languages are often also capable of 
 exporting code to multiple targets.
 
-In the case of both textual DSLs and visual programming languages,
-their ability to target multiple deployment environments may be visualized
-as seen in Figure~\ref{fig1}. They are a single-input, multiple output systems.
+In the case of both textual DSLs and visual programming languages, their ability to target multiple deployment environments can be visualized as seen in Figure~\ref{fig1}. They are single-input, multiple output systems.
 
 \begin{figure}[ht]
 \centering
@@ -301,17 +261,10 @@ as seen in Figure~\ref{fig1}. They are a single-input, multiple output systems.
 \draw[->] (dsl) -- (t2);
 \draw[->] (dsl) -- (t3);
 \end{tikzpicture}
-\caption{\label{fig1}{\it Graphical representation
-of an audio DSL targeting multiple 
-deployment environments.}}
+\caption{\label{fig1}{\it Schematic representation of an audio DSL targeting multiple deployment environments.}}
 \end{figure}
 
-A more flexible approach is a solution that can receive input
-in the form of source code from myriad programming languages,
-and also target multiple deployment environments. 
-Traditionally this may look like Figure~\ref{fig2}, 
-depicting how each programming language must have its own
-toolchain to target each deployment environment. 
+A more flexible approach is a solution that can receive input in the form of source code from myriad programming languages, and also target multiple deployment environments. Traditionally, this may look like Figure~\ref{fig2}, which depicts how each programming language must have its own toolchain to target each deployment environment. 
 
 \begin{figure}[H]
 \centering
@@ -328,19 +281,11 @@ toolchain to target each deployment environment.
 }
 }
 \end{tikzpicture}
-\caption{\label{fig2}{\it Graphical representation 
+\caption{\label{fig2}{\it Schematic representation 
 of per-language, per-target toolchains.}}
 \end{figure}
 
-By utilizing an intermediate representation,
-the complexity of this system may be reduced.
-A single runtime for the intermediate format on any target
-enables all programming languages that can compile to the
-representation to immediately target that environment.
-Conversely, any programming language that can compile to the
-intermediate representation may target any environment that
-has a runtime for that representation. 
-This is visualized in Figure~\ref{fig3}.
+Using an intermediate representation, the complexity of this system may be reduced. A single runtime for the intermediate format on any target enables all programming languages that can compile to the representation to immediately target that environment. Conversely, any programming language that can compile to the intermediate representation may target any environment that has a runtime for that representation. This is visualized in Figure~\ref{fig3}.
 
 \begin{figure}[H]
 \center
@@ -359,10 +304,7 @@ This is visualized in Figure~\ref{fig3}.
 \draw[->] (ir) -- (t2);
 \draw[->] (ir) -- (t3);
 \end{tikzpicture}
-\caption{\label{fig3}{\it Graphical representation
-of multiple languages targeting an 
-intermediate representation, 
-which supports multiple targets.}}
+\caption{\label{fig3}{\it Schematic representation of multiple languages targeting an intermediate representation that supports multiple targets.}}
 \end{figure}
 
 \section{ Related Work }
@@ -373,18 +315,13 @@ Maybe mention Sonical.
 Definitely mention AudioReach.
 
 \subsection{ Domain-Specific Programming for Audio DSP (FAUST and Gen\~~) }
-FAUST[], a domain specific programming language for real-time DSP. 
-FAUST affords the programmer the ability to define audio processing 
-without having to manually manage memory, 
-and to target multiple different deployments from the same code. 
-The downside of the bargain is that the programmer must learn Faust.
+FAUST[], a domain specific programming language for real-time DSP. FAUST affords the programmer the ability to define audio processing  without having to manually manage memory, and to target multiple different deployments from the same code. The downside of the bargain is that the programmer must learn Faust.
 
 Note: Figure 17 of 
 "FAUST Domain Specific Audio DSP Language Compiled to WebAssembly" 
 shows the performance of FAUST->C->emcc->wasm roughly equal to FAUST->wasm.
 
-A node-oriented option is Gen\~~. 
-Gen\~~ affords the ability to create efficient, 
+A node-oriented option is Gen\~~. Gen\~~ affords the ability to create efficient, 
 low-level[] audio processing without having to write code at all, 
 yet also exposes a textual code interface for advanced users. 
 Like FAUST, Gen also deploys to many targets, by generating code.
@@ -446,9 +383,9 @@ of different runtimes across algorithms.}
   Algorithm & Native & WAMR AOT & Wasm2c & Wasmi \\
   \hline
   FAUST Spring Reverb & 1.0x & 0.970x & 0.852x & 0.081x \\
-Neural Amp Modeler & XX & XX & XX & XX \\
-Klon Centaur Overdrive & XX & XX & XX & XX \\
-Fourth Algorithm & XX & XX & XX & XX \\
+  Neural Amp Modeler & XX & XX & XX & XX \\
+  Klon Centaur Overdrive & XX & XX & XX & XX \\
+  Fourth Algorithm & XX & XX & XX & XX \\
   \hline
 \end{tabular}
 \label{tab:performance}
