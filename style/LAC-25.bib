@@ -1,3 +1,20 @@
+@inproceedings{10.1145/266021.266373,
+author = {Liem, Clifford and Cornero, Marco and Santana, Miguel and Paulin, Pierre and Jerraya, Ahmed and Gentit, Jean-Marc and Lopez, Jean and Figari, Xavier and Bergher, Laurent},
+title = {Am embedded system case study: the firm ware development environment for a multimedia audio processor},
+year = {1997},
+isbn = {0897919203},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/266021.266373},
+doi = {10.1145/266021.266373},
+abstract = {This paper outlines a case study at SGS-Thomson Microelectronicson the development of a firmware development environment in co-operationwith Thomson Consumer Electronics Components. Theenviornment is for an embedded processor used for audiodecompression algorithms including: MPEG2, Dolby AC-3 Surround,and Dolby Pro-logic. The enabling component of the firmwareenvironment is a retargetable compiler which maps high-levelalgorithms onto the embedded processor. Although compilation is thecritical technology, this experience has shown that it is insufficient andthat other supporting design tools are also important. For this project,that environment includes an instruction-set simulator, a source-leveldebugger, a custom linker, and a compiler validation strategy. Themethodologies are outlined in this paper with an emphasis on thelessons learned in this hardware-software team development.},
+booktitle = {Proceedings of the 34th Annual Design Automation Conference},
+pages = {780–785},
+numpages = {6},
+location = {Anaheim, California, USA},
+series = {DAC '97}
+}
+
 @inproceedings{2018_13,
   abstract = {This paper introduces iPlug 2: a desktop C++ audio plug-in framework that has been extended and reworked in order to support Web Audio Modules, a new format for browser-based audio effects and instruments, using WebAssembly. iPlug 2 provides a complete solution and workflow for the development of cross-platform audio plug-ins and apps. It allows the same concise C++ code to be used to create desktop and web-based versions of a software musical instrument or audio effect, including audio signal processing and user interface elements. This new version of the framework has been updated to increase its flexibility so that alternative drawing APIs, plug-in APIs and platform APIs can be supported easily. We have added support for the distributed models used in recent audio plug-in formats, as well as new graphics capabilities. The codebase has also been substantially modernised. In this paper, we introduce the problems that iPlug 2 aims to address and discuss trends in modern plug-in APIs and existing solutions. We then present iPlug 2 and the work required to refactor a desktop plug-in framework to support the web platform. Several approaches to implementing graphical user interfaces are discussed as well as creating remote editors using web technologies. A real-world example of a WAM compiled with iPlug 2 is hosted at https://virtualcz.io, a new webbased version of a commercially available synthesizer plug-in.},
   address = {Berlin, Germany},
@@ -13,49 +30,38 @@
   ISSN = {2663-5844}
 }
 
-@inproceedings{10.1145/3487553.3524225,
-author = {Buffa, Michel and Ren, Shihong and Campbell, Owen and Burns, Tom and Yi, Steven and Kleimola, Jari and Larkin, Oliver},
-title = {Web Audio Modules 2.0: An Open Web Audio Plugin Standard},
-year = {2022},
-isbn = {9781450391306},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-url = {https://doi.org/10.1145/3487553.3524225},
-doi = {10.1145/3487553.3524225},
-abstract = {A group of academic researchers and developers from the computer music industry have joined forces for over a year to propose a new version of Web Audio Modules, an open source framework facilitating the development of high-performance Web Audio plugins (instruments, realtime audio effects and MIDI processors). While JavaScript and Web standards are becoming increasingly flexible and powerful, C, C++, and domain-specific languages such as FAUST or Csound remain the prevailing languages used by professional developers of native plugins. Fortunately, it is now possible to compile them in WebAssembly, which means they can be integrated with the Web platform. Our work aims to create a continuum between native and browser based audio app development and to appeal to programmers from both worlds. This paper presents our proposal including guidelines and implementations for an open Web Audio plugin standard - essentially the infrastructure to support high level audio plugins for the browser.},
-booktitle = {Companion Proceedings of the Web Conference 2022},
-pages = {364–369},
-numpages = {6},
-keywords = {Web Audio, Web standards, audio effects and instruments, plugin architecture},
-location = {Virtual Event, Lyon, France},
-series = {WWW '22}
+@incollection{orlarey:hal-02159014,
+  TITLE = {{FAUST : an Efficient Functional Approach to DSP Programming}},
+  AUTHOR = {Orlarey, Yann and Fober, Dominique and Letz, St{\'e}phane},
+  URL = {https://hal.science/hal-02159014},
+  BOOKTITLE = {{NEW COMPUTATIONAL PARADIGMS FOR COMPUTER MUSIC}},
+  EDITOR = {Editions DELATOUR FRANCE},
+  PAGES = {65-96},
+  YEAR = {2009},
+  KEYWORDS = {signal ; real-time ; programming ; processing ; functional ; dataflow ; compiler},
+  PDF = {https://hal.science/hal-02159014v1/file/faust-chapter.pdf},
+  HAL_ID = {hal-02159014},
+  HAL_VERSION = {v1},
 }
 
-@article{Spa72,
-author={{Sparck Jones}, K.},
-year={1972},
-title={A Statistical Interpretation of Term Specificity and its Application in Retrieval},
-journal={Journal of Documentation},
-volume={28},
-number={1},
-pages={11-21}
+@book{lazzarini2016csound,
+  title={Csound: a sound and music computing system},
+  author={Lazzarini, Victor and Yi, Steven and Heintz, Joachim and Brandtsegg, {\O}yvind and McCurdy, Iain and others},
+  year={2016},
+  publisher={Springer}
 }
 
-@book{MosWal64,
-author={Mosteller, F. and D. Wallace},
-year={1964},
-title={Inference and Disputed Authorship: The Federalist},
-publisher={Addison-Wesley},
-address={Reading, Massachusetts}
+@article{huangc,
+  title={C-Major Language Reference Manual},
+  author={Huang, Stephanie and O’Reilly, Andrew and Sun, Jonathan and Tang, Laura}
 }
 
-@incollection{Kay86,
-  AUTHOR = {K., Martin},
-  TITLE = {Parsing in Functional Unification Grammar},
-  YEAR = {1986},
-  BOOKTITLE = {Readings in Natural Language Processing},
-  EDITOR = {B. J. Grosz, K. Spark Jones and B. L. Webber},
-  PUBLISHER = {Morgan Kaufmann Publishers},
-  ADDRESS = {Los Altos},
-  PAGES = {125-138}
+@inproceedings{puckette_puredata_1997,
+  author    = {Puckette, Miller S.},
+  title     = {Pure Data},
+  booktitle = {Proceedings of the International Computer Music Conference (ICMC '97)},
+  pages     = {224--227},
+  year      = {1997},
+  address   = {Thessaloniki, Greece},
+  organization = {International Computer Music Association}
 }
