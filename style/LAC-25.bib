@@ -65,3 +65,171 @@ series = {DAC '97}
   address   = {Thessaloniki, Greece},
   organization = {International Computer Music Association}
 }
+
+
+@Article{fi15080275,
+AUTHOR = {Ray, Partha Pratim},
+TITLE = {An Overview of WebAssembly for IoT: Background, Tools, State-of-the-Art, Challenges, and Future Directions},
+JOURNAL = {Future Internet},
+VOLUME = {15},
+YEAR = {2023},
+NUMBER = {8},
+ARTICLE-NUMBER = {275},
+URL = {https://www.mdpi.com/1999-5903/15/8/275},
+ISSN = {1999-5903},
+ABSTRACT = {This paper explores the relationship between two emerging technologies, WebAssembly (Wasm) and the Internet of Things (IoT). It examines the complementary roles of these technologies and their impact on modern web applications. First, it delves into the capabilities of Wasm as a high-performance binary format that allows developers to leverage low-level languages for computationally intensive tasks. Second, it seeks to explain why integration of IoT and Wasm is important. Third, it discusses the strengths and limitations of various tools and tool chains that are crucial for Wasm development and implementation, with a special focus on IoT. Fourth, it presents the state-of-the-art with regard to advances that combine both technologies. Fifth, it discusses key challenges and provides future directions. Lastly, it provides an in-depth elaboration of the future aspects of Wasm, with a strong focus on IoT, concluding that IoT and Wasm can provide developers with a versatile toolkit that enables them to balance productivity and performance in both web and non-web development scenarios. The collaborative use of these technologies opens up new possibilities for pushing the boundaries of web application development in terms of interactivity, security, portability, scalability, and efficient computational capabilities. As web and non-web embeddings continue to evolve, the integration of IoT and Wasm will play a crucial role in shaping the future of innovative application development. The key findings of this extensive review work suggest that existing tool sets can be easily conglomerated together to form a new era in WebAssembly–IoT infrastructure for low-power, energy-efficient, and secure edge–IoT ecosystems with near-native execution speed. Furthermore, the expansion of edge–IoT ecosystems can be augmented with prospective cloud-side deployments. However, there remains a strong need to more cohesively advance the amalgamation of Wasm and IoT technologies in the near future.},
+DOI = {10.3390/fi15080275}
+}
+
+@inproceedings{10.1145/3498361.3538922,
+author = {Li, Borui and Fan, Hongchang and Gao, Yi and Dong, Wei},
+title = {Bringing webassembly to resource-constrained iot devices for seamless device-cloud integration},
+year = {2022},
+isbn = {9781450391856},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3498361.3538922},
+doi = {10.1145/3498361.3538922},
+abstract = {Recent years have witnessed the progressive integration between IoT (Internet of Things) devices and the cloud server, which promotes the efficiency and interoperability of IoT applications. WebAssembly, known for its performance and portability, is considered a promising technology to bridge the heterogeneity between devices and the server. Nevertheless, resource-constrained devices, which are commonly deployed in the wild, have difficulty participating in this device-cloud integration because they can hardly run WebAssembly efficiently.Hence, we propose WAIT, a lightweight <u>W</u>eb<u>A</u>ssembly runtime on resource-constrained <u>I</u>o<u>T</u> devices for device-cloud integrated applications. WAIT is the first work to enable the Ahead-of-Time (AOT) compilation of WebAssembly on resource-constrained devices by leveraging several approaches to reduce memory usage. Moreover, WAIT introduces various safety checks at compile-time to guarantee the sandbox execution of WebAssembly and optimizes energy consumption for IoT devices. Results show that WAIT achieves 84.8\texttimes{} lower RAM usage compared with the state-of-the-art WebAssembly AOT runtime, and reduces energy consumption by 1.2\texttimes{}~4.9\texttimes{} while guaranteeing the sandboxed execution of WebAssembly modules.},
+booktitle = {Proceedings of the 20th Annual International Conference on Mobile Systems, Applications and Services},
+pages = {261–272},
+numpages = {12},
+keywords = {ahead-of-time compilation, internet of things, webassembly},
+location = {Portland, Oregon},
+series = {MobiSys '22}
+}
+
+@InProceedings{10.1007/978-3-030-74296-6_27,
+author="Koren, Istv{\'a}n",
+editor="Brambilla, Marco
+and Chbeir, Richard
+and Frasincar, Flavius
+and Manolescu, Ioana",
+title="A Standalone WebAssembly Development Environment for the Internet of Things",
+booktitle="Web Engineering",
+year="2021",
+publisher="Springer International Publishing",
+address="Cham",
+pages="353--360",
+abstract="In Industry 4.0, there is a growing demand to perform high-performance and latency-sensitive computations at the edge. Increasingly, machine data is not only collected but also processed and translated into actionable decisions influencing production parameters in real-time. However, heterogeneous hardware in the Internet of Things prevents the adoption of consistent development and deployment structures as known from service containers. WebAssembly is a recent hardware-agnostic bytecode format that is capable of running not only in the browser, but also on microcontrollers and in cloud environments. In this article, we argue that this web technology can have a real impact by leveraging tools and programming languages that web engineers are familiar with. As a first step, we present a proof-of-concept integrated development and deployment environment to execute WebAssembly modules on microcontrollers. Its key feature is a built-in web server that provides a self-contained browser-based IDE to directly develop, compile and flash AssemblyScript code to a device. In this sense, the Web of Things will unfold a streamlined development and deployment context for the agile and low-latency operationalization of adjustable data streaming and action-oriented process adaptations for industrial devices.",
+isbn="978-3-030-74296-6"
+}
+
+@inproceedings{10.1145/3593434.3593454,
+author = {Wagner, Linus and Mayer, Maximilian and Marino, Andrea and Soldani Nezhad, Alireza and Zwaan, Hugo and Malavolta, Ivano},
+title = {On the Energy Consumption and Performance of WebAssembly Binaries across Programming Languages and Runtimes in IoT},
+year = {2023},
+isbn = {9798400700446},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3593434.3593454},
+doi = {10.1145/3593434.3593454},
+abstract = {Context. WebAssembly (WASM) is a low-level bytecode format that is gaining traction among Internet of Things (IoT) devices. Because of IoT devices’ resources limitations, using WASM is becoming a popular technique for virtualization on IoT devices. However, it is unclear if the promises of WASM regarding its efficient use of energy and performance gains hold true. Goal. This study aims to determine how different source programming languages and runtime environments affect the energy consumption and performance of WASM binaries. Method. We perform a controlled experiment where we compile three benchmarking algorithms from four different programming languages (i.e., C, Rust, Go, and JavaScript) to WASM and run them using two different WASM runtimes on a Raspberry Pi 3B. Results. The source programming language significantly influences the performance and energy consumption of WASM binaries. We did not find evidence of the impact of the runtime environment. However, certain combinations of source programming language and runtime environment leads to a significant improvement of its energy consumption and performance. Conclusions. IoT developers should choose the source programming language wisely to benefit from better performance and a reduction in energy consumption. Specifically, Javy-compiled JavaScript should be avoided, while C and Rust are better options. We found no conclusive results for the choice of the WASM runtime.},
+booktitle = {Proceedings of the 27th International Conference on Evaluation and Assessment in Software Engineering},
+pages = {72–82},
+numpages = {11},
+location = {Oulu, Finland},
+series = {EASE '23}
+}
+
+@ARTICLE{10756513,
+  author={Li, Borui and Fan, Hongchang and Gao, Yi and Dong, Wei},
+  journal={IEEE Transactions on Computers}, 
+  title={WaWoT: Towards Flexible and Efficient Web of Things Services via WebAssembly on Resource-Constrained IoT Devices}, 
+  year={2025},
+  volume={74},
+  number={3},
+  pages={1094-1108},
+  keywords={Internet of Things;Runtime;Standards;Interoperability;Codes;Performance evaluation;Computers;Safety;Protocols;Optimization;WebAssembly;Internet of Things;web of things;ahead of time compilation},
+  doi={10.1109/TC.2024.3500385}}
+
+@article{Rusum_2022, title={WebAssembly across Platforms: Running Native Apps in the Browser, Cloud, and Edge}, volume={3}, url={https://ijetcsit.org/index.php/ijetcsit/article/view/341}, DOI={10.63282/3050-9246.IJETCSIT-V3I1P112}, abstractNote={WebAssembly (Wasm) is a highlights-based instruction layout conceived with the help of safe, rapid, and portable execution of code on an assortment of stages, with the most notable one being the web. This paper will discuss how WebAssembly enables the execution of native applications in browsers, clouds, and on edge devices. We contextualize Wasm through the history of modern runtime systems and web technologies, and peer into the structure of the spec, the strategies of its compilation and deployment across platforms. The paper evaluates various runtime engines, including Wasmtime, Wasmer, and V8, as well as their optimisations and applications in the real world. Experimental evidence supporting performance trade-offs is analyzed in detail. Additionally, we discuss the security and sandboxing capabilities of Wasm, which make it a reliable option for executing untrusted code. We also suggest a method for creating cross-platform applications in languages such as Rust and C/C++, compiling them into Web Assembly (Wasm), and deploying the results effortlessly across web, cloud, and edge environments. Major vendors of clouds and IoT deployments are examined in terms of real-life use cases. The outcomes indicate that WebAssembly drastically minimizes the latency in cloud-to-edge communications and adds portability to applications. Future directions of research are discussed in the conclusion, which involve native threading support, garbage collection, and extended hardware capabilities
+}, number={1}, journal={International Journal of Emerging Trends in Computer Science and Information Technology}, author={Rusum, Guru Pramod}, year={2022}, month={Mar.}, pages={107–115} }
+
+@article{IOTW753,
+	author = {Mislav Has AND Tao Xiong AND Fehmi Ben Abdesslem AND Mario Kušek},
+	title = {WebAssembly on Resource-Constrained IoT Devices: Performance, Efficiency, and Portability},
+	volume = {1},
+	year = {2025},
+	url = {https://iotw-proceedings.dsg.tuwien.ac.at/article/id/753/},
+	issue = {1},
+	doi = {10.34749/3061-1008.2025.5},
+	abstract = {The increasing heterogeneity of hardware and software in the Internet of Things (IoT) poses a major challenge for the portability, maintainability and deployment of software on devices with limited resources. WebAssembly (WASM), originally designed for the web, is increasingly recognized as a portable, secure and efficient runtime environment that can overcome these challenges. This paper explores the feasibility of using WASM in embedded IoT systems by evaluating its performance, memory footprint and energy consumption on three representative microcontrollers: the Raspberry Pi Pico, the ESP32 C6 and the nRF5340. Two lightweight WASM runtimes, WAMR and wasm3, are compared with the native C execution. The results show that while the native execution remains superior in terms of speed and energy efficiency, WASM offers acceptable trade-offs in return for cross-platform compatibility and sandbox execution. The results highlight that WASM is a viable option for embedded IoT applications when portability and security outweigh strict performance constraints, and that further runtime optimization could extend its practicality in this area.},
+	month = {11},
+	pages = {29-35},
+	keywords = {WebAssembly,Internet of Things,Resource-Constrained Devices,Runtime Performance,Energy Consumption},
+	issn = {3061-1008},
+	publisher ={Institute of Information Systems Engineering, TU Wien},
+	journal = {IoT Workshop Proceedings}
+}
+
+@article{PATEL201562,
+title = {Enabling high-level application development for the Internet of Things},
+journal = {Journal of Systems and Software},
+volume = {103},
+pages = {62-84},
+year = {2015},
+issn = {0164-1212},
+doi = {https://doi.org/10.1016/j.jss.2015.01.027},
+url = {https://www.sciencedirect.com/science/article/pii/S0164121215000187},
+author = {Pankesh Patel and Damien Cassou},
+keywords = {Internet of Things, Domain-specific languages, Development life-cycle},
+abstract = {Application development in the Internet of Things (IoT) is challenging because it involves dealing with a wide range of related issues such as lack of separation of concerns, and lack of high-level of abstractions to address both the large scale and heterogeneity. Moreover, stakeholders involved in the application development have to address issues that can be attributed to different life-cycles phases. when developing applications. First, the application logic has to be analyzed and then separated into a set of distributed tasks for an underlying network. Then, the tasks have to be implemented for the specific hardware. Apart from handling these issues, they have to deal with other aspects of life-cycle such as changes in application requirements and deployed devices. Several approaches have been proposed in the closely related fields of wireless sensor network, ubiquitous and pervasive computing, and software engineering in general to address the above challenges. However, existing approaches only cover limited subsets of the above mentioned challenges when applied to the IoT. This paper proposes an integrated approach for addressing the above mentioned challenges. The main contributions of this paper are: (1) a development methodology that separates IoT application development into different concerns and provides a conceptual framework to develop an application, (2) a development framework that implements the development methodology to support actions of stakeholders. The development framework provides a set of modeling languages to specify each development concern and abstracts the scale and heterogeneity related complexity. It integrates code generation, task-mapping, and linking techniques to provide automation. Code generation supports the application development phase by producing a programming framework that allows stakeholders to focus on the application logic, while our mapping and linking techniques together support the deployment phase by producing device-specific code to result in a distributed system collaboratively hosted by individual devices. Our evaluation based on two realistic scenarios shows that the use of our approach improves the productivity of stakeholders involved in the application development.}
+}
+
+@misc{JUCE,
+  author = {{Raw Material Software Ltd}},
+  title = {{JUCE} Framework},
+  year = {2026},
+  url = {https://juce.com/},
+  note = {Accessed: 2026-02-23}
+}
+
+@manual{MaxMSP8,
+  title        = {Max/MSP/Jitter},
+  author       = {{Cycling '74}},
+  organization = {Cycling '74},
+  year         = {2024},
+  note         = {Version 8.6},
+  url          = {https://cycling74.com}
+}
+
+@book{wakefield2012real,
+  title={Real-time meta-programming for interactive computational arts},
+  author={Wakefield, Graham},
+  year={2012},
+  publisher={University of California at Santa Barbara}
+}
+
+@inproceedings{zakai2011emscripten,
+  title={Emscripten: an LLVM-to-JavaScript compiler},
+  author={Zakai, Alon},
+  booktitle={Proceedings of the ACM international conference companion on Object oriented programming systems languages and applications companion},
+  pages={301--312},
+  year={2011}
+}
+
+@INPROCEEDINGS{1281665,
+  author={Lattner, C. and Adve, V.},
+  booktitle={International Symposium on Code Generation and Optimization, 2004. CGO 2004.}, 
+  title={LLVM: a compilation framework for lifelong program analysis & transformation}, 
+  year={2004},
+  volume={},
+  number={},
+  pages={75-86},
+  keywords={Information analysis;Program processors;Performance analysis;High level languages;Virtual machining;Runtime;Arithmetic;Application software;Software safety;Algorithm design and analysis},
+  doi={10.1109/CGO.2004.1281665}}
+
+@book{lindholm2013java,
+  title={The Java virtual machine specification},
+  author={Lindholm, Tim and Yellin, Frank and Bracha, Gilad and Buckley, Alex},
+  year={2013},
+  publisher={Addison-wesley}
+}
+
+@inproceedings{gaster2020audio,
+  title={Audio Anywhere with Faust},
+  author={Gaster, Benedict and Cole, Max},
+  booktitle={Proceedings of the 2nd international faust conference},
+  year={2020}
+}
