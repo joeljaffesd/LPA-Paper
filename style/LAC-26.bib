@@ -81,24 +81,6 @@ ABSTRACT = {This paper explores the relationship between two emerging technologi
 DOI = {10.3390/fi15080275}
 }
 
-@inproceedings{10.1145/3498361.3538922,
-author = {Li, Borui and Fan, Hongchang and Gao, Yi and Dong, Wei},
-title = {Bringing webassembly to resource-constrained iot devices for seamless device-cloud integration},
-year = {2022},
-isbn = {9781450391856},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-url = {https://doi.org/10.1145/3498361.3538922},
-doi = {10.1145/3498361.3538922},
-abstract = {Recent years have witnessed the progressive integration between IoT (Internet of Things) devices and the cloud server, which promotes the efficiency and interoperability of IoT applications. WebAssembly, known for its performance and portability, is considered a promising technology to bridge the heterogeneity between devices and the server. Nevertheless, resource-constrained devices, which are commonly deployed in the wild, have difficulty participating in this device-cloud integration because they can hardly run WebAssembly efficiently.Hence, we propose WAIT, a lightweight <u>W</u>eb<u>A</u>ssembly runtime on resource-constrained <u>I</u>o<u>T</u> devices for device-cloud integrated applications. WAIT is the first work to enable the Ahead-of-Time (AOT) compilation of WebAssembly on resource-constrained devices by leveraging several approaches to reduce memory usage. Moreover, WAIT introduces various safety checks at compile-time to guarantee the sandbox execution of WebAssembly and optimizes energy consumption for IoT devices. Results show that WAIT achieves 84.8\texttimes{} lower RAM usage compared with the state-of-the-art WebAssembly AOT runtime, and reduces energy consumption by 1.2\texttimes{}~4.9\texttimes{} while guaranteeing the sandboxed execution of WebAssembly modules.},
-booktitle = {Proceedings of the 20th Annual International Conference on Mobile Systems, Applications and Services},
-pages = {261–272},
-numpages = {12},
-keywords = {ahead-of-time compilation, internet of things, webassembly},
-location = {Portland, Oregon},
-series = {MobiSys '22}
-}
-
 @InProceedings{10.1007/978-3-030-74296-6_27,
 author="Koren, Istv{\'a}n",
 editor="Brambilla, Marco
@@ -201,14 +183,6 @@ abstract = {Application development in the Internet of Things (IoT) is challengi
   publisher={University of California at Santa Barbara}
 }
 
-@inproceedings{zakai2011emscripten,
-  title={Emscripten: an LLVM-to-JavaScript compiler},
-  author={Zakai, Alon},
-  booktitle={Proceedings of the ACM international conference companion on Object oriented programming systems languages and applications companion},
-  pages={301--312},
-  year={2011}
-}
-
 @INPROCEEDINGS{1281665,
   author={Lattner, C. and Adve, V.},
   booktitle={International Symposium on Code Generation and Optimization, 2004. CGO 2004.}, 
@@ -263,10 +237,12 @@ abstract = {Application development in the Internet of Things (IoT) is challengi
   year={2020}
 }
 
-@article{delgadillo2025fully,
-  title={A fully client-side C++ IDE for CS1 using WebAssembly},
-  author={Delgadillo, Joshua and Piech, Chris},
-  year={2025}
+@misc{delgadillo2025fully,
+  author = {Delgadillo, Joshua and Piech, Chris},
+  title = {A Fully Client-Side C++ IDE for CS1 Using WebAssembly},
+  year = {2025},
+  howpublished = {\url{https://cs191.stanford.edu/projects/Delgadillo2025.pdf}},
+  note = {Accessed: 2026-03-09}
 }
 
 @INPROCEEDINGS{6654478,
@@ -288,6 +264,14 @@ abstract = {Application development in the Internet of Things (IoT) is challengi
   month        = {Feb},
   howpublished = {\url{https://www.youtube.com/watch?v=WRcm2b877ek}},
   note         = {YouTube video, accessed 5 Mar 2026}
+}
+
+@misc{evans_wasm_microcontrollers,
+  author       = {Ron Evans},
+  title        = {{The Smallest Thing That Could Possibly Work: WASM on Microcontrollers With TinyGo}},
+  howpublished = {\url{https://www.youtube.com/watch?v=24NDl27mZu4}},
+  year         = {2024},
+  note         = {YouTube video. Accessed: Mar. 8, 2026}
 }
 
 @inproceedings{jongsataporn2025embedded,
@@ -321,7 +305,7 @@ abstract = {Application development in the Internet of Things (IoT) is challengi
   title        = {Wasmi - WebAssembly (Wasm) Interpreter},
   year         = {2018},
   howpublished = {\url{https://github.com/wasmi-labs/wasmi}},
-  note         = {Accessed: March 5, 2026}
+  note         = {GitHub repository. Accessed: March 5, 2026}
 }
 
 @misc{wasmiRepo,
@@ -329,7 +313,7 @@ abstract = {Application development in the Internet of Things (IoT) is challengi
   title = {wasmi-demo},
   year = {2026},
   howpublished = {\url{https://github.com/jaffco/wasmi-demo}},
-  note = {Accessed: 5 Mar 2026}
+  note = {GitHub repository. Accessed: 5 Mar 2026}
 }
 
 @misc{wasm2cRepo,
@@ -337,7 +321,15 @@ abstract = {Application development in the Internet of Things (IoT) is challengi
   title = {wasm2c-demo},
   year = {2026},
   howpublished = {\url{https://github.com/jaffco/wasm2c-demo}},
-  note = {Accessed: 5 Mar 2026}
+  note = {GitHub repository. Accessed: 5 Mar 2026}
+}
+
+@misc{binji_wasm_clang,
+  author       = {Ben Smith},
+  title        = {{wasm-clang}},
+  howpublished = {\url{https://github.com/binji/wasm-clang}},
+  year         = {2019},
+  note         = {GitHub repository. Accessed: Mar. 8, 2026}
 }
 
 @misc{wamrRepo,
@@ -345,7 +337,7 @@ abstract = {Application development in the Internet of Things (IoT) is challengi
   title = {wamr-demo},
   year = {2026},
   howpublished = {\url{https://github.com/jaffco/wamr-demo}},
-  note = {Accessed: 5 Mar 2026}
+  note = {GitHub repository. Accessed: 5 Mar 2026}
 }
 
 @misc{Hear-Crepo,
@@ -353,7 +345,7 @@ abstract = {Application development in the Internet of Things (IoT) is challengi
   title = {Hear-C},
   year = {2026},
   howpublished = {\url{https://github.com/joeljaffesd/Hear-C}},
-  note = {Accessed: 5 Mar 2026}
+  note = {GitHub repository. Accessed: 5 Mar 2026}
 }
 
 @misc{embedded-wasm-apps_repo,
@@ -361,14 +353,14 @@ abstract = {Application development in the Internet of Things (IoT) is challengi
   title = {embedded-wasm-apps},
   year = {2021},
   howpublished = {\url{https://github.com/wasm3/embedded-wasm-apps}},
-  note = {Accessed: 5 Mar 2026}
+  note = {GitHub repository. Accessed: 5 Mar 2026}
 }
 
 @misc{wabt-repo,
   author = {{WABT Contributors}},
   title = {WABT: The WebAssembly Binary Toolkit},
   howpublished = {\url{https://github.com/WebAssembly/wabt}},
-  note = {Accessed: 5 Mar 2026}
+  note = {GitHub repository. Accessed: 5 Mar 2026}
 }
 
 
@@ -377,7 +369,7 @@ abstract = {Application development in the Internet of Things (IoT) is challengi
   title = {DaisyOnline},
   year = {2026},
   howpublished = {\url{https://github.com/jaffco/DaisyOnline}},
-  note = {Accessed: 5 Mar 2026}
+  note = {GitHub repository. Accessed: 5 Mar 2026}
 }
 
 @misc{nytimes_doom_ports_2025,
@@ -450,14 +442,6 @@ keywords = {virtual machines, type systems, programming languages, just-in-time 
   note         = {GitHub repository. Accessed: Mar. 7, 2026}
 }
 
-@misc{youtube_steamdeck_guitar_rig,
-  author       = {{YouTube}},
-  title        = {{The Steam Deck Is My Entire Guitar Rig}},
-  howpublished = {\url{https://youtu.be/yL1DM0QWGSE}},
-  year         = {2026},
-  note         = {YouTube video. Accessed: Mar. 7, 2026}
-}
-
 @misc{interfacinglinux_yabridge,
   author       = {{Interfacing Linux}},
   title        = {{Windows VSTs on Linux with yabridge}},
@@ -509,4 +493,12 @@ keywords = {virtual machines, type systems, programming languages, just-in-time 
   author={Mulshine, Michael and Wang, Ge and Chafe, Chris and Atherton, Jack and Feng, Terry and Betancur, Celeste},
   booktitle={NIME},
   year={2023}
+}
+
+@misc{bytecode_alliance,
+  author       = {{Bytecode Alliance}},
+  title        = {{Bytecode Alliance}},
+  howpublished = {\url{https://bytecodealliance.org/}},
+  year         = {2026},
+  note         = {Accessed: Mar. 10, 2026}
 }
