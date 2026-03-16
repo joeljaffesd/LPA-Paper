@@ -221,7 +221,7 @@ Third-party plugins are ubiquitous in desktop audio software, but remain rare in
 
 To enable third-party DSP in embedded systems, I have investigated the WebAssembly (WASM) binary instruction format as a hardware-agnostic intermediate representation (IR) for distributing third-party audio processing. 
 
-To assess feasibility under real-time constraints, I have compiled representative audio DSP algorithms to WASM and compared their performance across three execution strategies on an embedded platform (Daisy Seed). Performance measurements demonstrate that runtimes leveraging ahead-of-time (AOT) translation of WASM yield acceptable performance for a meaningful subset of audio algorithms, indicating the viability of WASM as a portable distributable for embedded DSP. 
+To assess feasibility under real-time constraints, I have compiled representative audio DSP algorithms to WASM and compared their performance across three execution strategies on an embedded platform (Daisy Seed). Performance measurements demonstrate that runtimes leveraging ahead-of-time (AOT) translation of WASM yield acceptable performance for a meaningful subset of audio processing algorithms, indicating the viability of WASM as a portable distributable for embedded DSP. 
 
 In addition to embedded deployment, WASM is supported by runtimes in desktop audio, plugin hosts, and web environments, enabling shared DSP implementations and presets across platforms. To support further work in unifying these environments, I have created an online development tool for authoring and deploying WASM-based audio plugins. 
 
@@ -357,7 +357,7 @@ In computing generally, intermediate representation (IR) often takes one of two 
 
 % When used one way, it's interpretation, another way, AOT, 
  
-Prior research in digital audio has proposed WASM as a universal distributable for audio DSP with a framework entitled \textit{Audio Anywhere}\cite{gaster2020audio}, although development of this project has ceased. In this work, the authors explored interpreter-based execution and ahead-of-time (AOT) translation strategies for their runtimes targeting embedded, but limited their scope to WASM modules compiled from a single input source language. Building on their research, I have investigated alternative AOT translation strategies for WASM modules, enabled additional high-level source code languages (C/C++) as input, benchmarked a wider range of audio processing algorithms, and developed web-based tooling for development and distribution.
+Prior research in digital audio has proposed WASM as a universal distributable for audio DSP with a framework entitled \textit{Audio Anywhere}\cite{gaster2020audio}, although development of this project has ceased. In their work, the authors explored interpreter-based execution and ahead-of-time (AOT) translation strategies for their runtimes targeting embedded, but limited their scope to WASM modules compiled from a single input source language. Building on their research, I have investigated alternative AOT translation strategies for WASM modules, enabled additional high-level source code languages (C/C++) as input, benchmarked a wider range of audio processing algorithms, and developed web-based tooling for development and distribution.
  
  % , and focus exclusively on embedded contexts.
 
@@ -383,7 +383,7 @@ My findings suggest that with further research, a carefully specified WASM ABI f
 
 % \vspace{24pt}
 
-One approach is the use of \textit{intermediary plugin frameworks}, which have become very popular among audio developers\cite{2018_13}. Plugin frameworks provide a uniform application programming interface (API) in a particular programming language (typically C/C++) for producing many platform-specific executables from the same source code. The most widely used of these frameworks is JUCE\cite{JUCE}, which has become the industry standard. JUCE provides a C++ API by which the same audio processing and user interface code can be compiled for multiple targets, including cross-platform standalone audio applications, myriad plugin formats for digital audio workstations (DAWs), game engine plugins, and mobile apps. An alternative intermediary plugin framework, iPlug2\cite{2018_13}, adds Web Audio as a target via the Web Audio Modules\cite{10.1145/3487553.3524225} standard but is also implemented as a C++ API. Although both JUCE and iPlug2 provide the ability to address multiple targets from a single codebase, they still require separate compilation and binary distribution for each platform. 
+One approach is the use of \textit{intermediary plugin frameworks}, which have become very popular among audio developers\cite{2018_13}. Plugin frameworks provide a uniform application programming interface (API) in a particular programming language (typically C/C++) for producing many platform-specific executables from the same source code. The most widely used of these frameworks is JUCE\cite{JUCE}, which has become the industry standard. JUCE provides a C++ API by which the same audio processing and user interface code can be compiled for multiple targets, including cross-platform standalone applications, myriad plugin formats for digital audio workstations (DAWs), game engine plugins, and mobile apps. An alternative intermediary plugin framework, iPlug2\cite{2018_13}, adds Web Audio as a target via the Web Audio Modules\cite{10.1145/3487553.3524225} standard but is also implemented as a C++ API. Although both JUCE and iPlug2 provide the ability to address multiple targets from a single codebase, they still require separate compilation and binary distribution for each platform. 
 
 Another approach can be observed in the use of domain-specific languages (DSLs) for audio programming. Textual examples include CSound\cite{lazzarini2016csound}, FAUST\cite{orlarey:hal-02159014}, and CMajor\cite{huangc}; visual examples include Max\cite{MaxMSP8}, Gen\textasciitilde\cite{wakefield2012real}, and PureData\cite{puckette_puredata_1997}. The primary advantages of these languages are that they enable the developer to focus strictly on audio processing logic without handling memory management and other low-level programming tasks, and that they often target multiple deployments by exporting generated code. Some downsides are that they require programmers to learn a new language, that they may constrain the developer to a particular paradigm of signal processing, and that some are not free or open-source. 
 
@@ -480,7 +480,7 @@ An issue facing systems that depend on LV2 is that users are beholden to develop
 
 Another approach is one presented by researchers in \cite{spittle2021developing}, who implemented a novel framework for developing embedded audio applications that expect the GUI and audio processing to be separated over network. This approach relies on a custom operating system they maintain, called EarOS.
 
-While not explicitly related to plugins, researchers in \cite{lai2025audioreach} developed an open-source framework for deploying the same audio processing to heterogeneous embedded systems. Their support for third-party processing defined in C or MATLAB/Simulink provides an example of coexistence between embedded audio modules authored in myriad programming languages. 
+While not explicitly related to plugins, researchers in \cite{lai2025audioreach} developed an open-source framework for deploying the same audio processing to heterogeneous embedded systems. Their support for third-party audio processing defined in C or MATLAB/Simulink provides an example of coexistence between embedded audio modules authored in different programming languages. 
 
 % Sonical 
 % AudioReach
@@ -500,38 +500,38 @@ To investigate the feasibility of WebAssembly (WASM) as a universal distributabl
 
 \subsection{ Algorithms }
 
-In order to relate this research to real-world applications, I sourced a set of DSP algorithms that span major paradigms in both contemporary audio effects design and development workflows.
+In order to contextualize this research relative to real-world applications, I sourced a set of DSP algorithms that span major paradigms in both contemporary audio effects design and development workflows.
 
 % \bigskip 
 
 % \noindent \textbf{ FAUST Reverb }
 \subsubsection{ FAUST Reverb}
 
-The FAUST domain-specific programming language (DSL) is popular among audio developers for its capability to generate code for myriad targets to be compiled separately, as well as its high-level semantics for describing audio DSP. The maintainers of FAUST supply many example programs, including a reverb algorithm I have used here. The algorithm uses physical modeling techniques to emulate a spring reverb effect.
+The FAUST domain-specific programming language (DSL) is popular among audio developers for its capability to generate code for many different targets to be compiled separately, as well as its high-level semantics for describing audio DSP. The maintainers of FAUST supply many example programs, including a reverb algorithm I have used here. The algorithm uses physical modeling techniques to emulate a spring reverb effect. 
 
 % \bigskip  
 
 \subsubsection{ Gen\textasciitilde \space Phaser }
 
-Gen\textasciitilde \space is another domain-specific programming language (DSL) for audio that is very popular. A major difference from FAUST is that Gen\textasciitilde \space is a \textit{visual} programming language, providing a user interface that is often less challenging for beginners. Like many other audio DSLs, Gen\textasciitilde \space provides the ability to export code to target different platforms. For the purposes of benchmarking, I used Gen\textasciitilde \space to construct an elementary phaser effect with four cascaded state variable filters (from the GO library\cite{BD0831917X}) and a low-frequency oscillator. 
+Gen\textasciitilde \space is another popular domain-specific programming language (DSL) for audio. A major difference from FAUST is that Gen\textasciitilde \space is a \textit{visual} programming language, providing a user interface that is often less challenging for beginners. Like many other audio DSLs, Gen\textasciitilde \space provides the ability to export code to target different platforms. For the purposes of benchmarking, I used Gen\textasciitilde \space to construct an elementary phaser effect with four cascaded state variable filters (from the GO library\cite{BD0831917X}) and a low-frequency oscillator. 
 
 \subsubsection{ Klon Centaur }
 
-The Klon Centaur is a highly acclaimed guitar overdrive pedal designed in the 1990s, whose circuitry has been copied in analog and digital forms many times over\cite{chowdhury2020comparison}. Prominent audio DSP programmer and scholar Jatin Chowdhury maintains an open-source C++ implementation using wave digital filters, a highly popular white-box modeling technique in audio DSP.
+The Klon Centaur is a highly acclaimed guitar overdrive pedal designed in the 1990s, whose circuitry has been copied in analog and digital forms many times over\cite{chowdhury2020comparison}. Prominent audio DSP programmer and scholar Jatin Chowdhury maintains an open-source C++ implementation using wave digital filters, a popular technique in audio DSP for white-box modeling of analog circuits.
 
 \subsubsection{ Neural Amp Modeler }
 
-Neural Amp Modeler (NAM)\cite{neuralampmodeler} is a free and open-source standard for black-box modeling of audio equipment using neural networks. It has become highly popular in both hobbyist communities and industry, but implementations vary widely across platforms. For this benchmark I have used a C++ implementation of a NAM inference engine authored by Keith Bloemer, written specifically for use on an embedded platform\cite{guitarml_mercury}. 
+Neural Amp Modeler (NAM)\cite{neuralampmodeler} is a free and open-source standard for black-box modeling of audio equipment using neural networks. It has become highly popular in both hobbyist communities and industry, but implementations vary widely across platforms. For this benchmark I have used a C++ implementation of a NAM inference engine authored by Keith Bloemer\cite{guitarml_mercury}, written specifically for use on an embedded platform. 
 
 % https://github.com/GuitarML/FunBox/blob/main/software/Mars/mars.cpp
 
 \subsection{ Runtimes }
 
-To compare deployment strategies for WASM on an embedded target, three distinct execution pipelines were selected for evaluation. They represent three fundamentally different approaches to executing WASM modules: ahead-of-time (AOT) compilation paired with an embedded-focused runtime, static translation to C followed by conventional compilation, and pure interpretation.
+To compare deployment strategies for WASM-based audio DSP on an embedded target, three distinct execution pipelines were selected for evaluation. They represent three fundamentally different approaches to executing WASM modules: ahead-of-time (AOT) compilation paired with an embedded-focused runtime, static translation to C followed by conventional compilation, and pure interpretation.
 
 \subsubsection{ Wasm Micro Runtime (WAMR) }
 
-The WebAssembly Micro Runtime (WAMR), maintained by the Bytecode Alliance\cite{bytecode_alliance}, is a lightweight WASM runtime explicitly designed for embedded systems. It supports multiple execution modes, including interpretation and AOT compilation. For this study, WAMR was used in AOT mode, in which WASM bytecode is compiled offline into target-specific native machine code. The resulting artifact is managed by the WAMR runtime, which provides memory management, stack handling, and host function bindings. 
+The WebAssembly Micro Runtime (WAMR), maintained by the Bytecode Alliance\cite{bytecode_alliance}, is a lightweight WASM runtime explicitly designed for embedded systems. It supports multiple execution modes, including interpretation and AOT translation. For this study, WAMR was used in AOT mode, in which WASM bytecode is compiled offline into target-specific native machine code. The resulting artifact is managed by the WAMR runtime, which provides memory management, stack handling, and host function bindings. 
 
 \subsubsection{ wasm2c }
 
@@ -542,25 +542,15 @@ The WebAssembly Micro Runtime (WAMR), maintained by the Bytecode Alliance\cite{b
 
 \lstinline{wasmi}\cite{wasmi} is a pure WebAssembly interpreter written in Rust. It executes WASM bytecode directly using a stack-based virtual machine, without just-in-time (JIT) or AOT compilation. Wasmi was selected to represent a baseline interpreter-only deployment strategy, providing contrast to AOT-based approaches by illustrating the performance cost of direct bytecode interpretation.
 
-% \noindent The three runtimes are:
-
-% \begin{itemize}
-%   \item Web Assembly Micro Runtime's "AOT" (Ahead of Time) Engine, which translates WebAssembly to a secondary IR for internal use
-%   \item De- and re- compilation of WebAssembly to C to native ARM binary, using wasm2c[?] and a runtime wrapper written by wasm3labs[?]
-%   \item Wasmi, a WebAssembly interpreter written in Rust
-% \end{itemize}
-
 \subsection { Embedded Target } 
 
 I have chosen the Electrosmith Daisy Seed as a representative platform for benchmarking embedded processing. Daisy is a widely popular embedded platform, similar to the Arduino\cite{arduino} ecosystem but with a focus on audio. The STM32 processor at its core is widely used across research and industry for embedded audio systems\cite{emilyharpist}\cite{diamond2025memorylane}\cite{jongsataporn2025embedded}.
-
-% It is available in both development and manufacturer oriented form factors, making it a popular choice across hobbyist, education, and industry use cases. It features an ARM Cortex M-7 processor that supports 32-bit processing at a 480MHz clock rate and can be programmed from various languages.
 
 \subsection { Benchmarking Code } 
 
 To benchmark execution time, the STM32H7's TIM2 hardware counter is leveraged to measure elapsed time in both raw tick counts and microseconds. Timer \lstinline{start()} and \lstinline{stop()} calls bookend calls to the WASM runtimes to process 128-sample blocks of audio data. For each algorithm and runtime combination, the elapsed time is averaged over 100 iterations. A 400MHz clock rate is used. The source code for benchmarks on WAMR, \lstinline{wasm2c}, and \lstinline{wasmi} are available at \cite{wamrRepo}, \cite{wasm2cRepo}, and \cite{wasmiRepo}, respectively, with dedicated Git branches for benchmarking each algorithm. Native benchmarking is included in \lstinline{wasm2c-demo}. Quantitative results are presented in \autoref{tab:throughput_raw}, \autoref{tab:relative_performance}, and \autoref{fig:relative_performance}.
 
-\vspace{24pt}
+\vspace{12pt}
 
 \begin{table}[ht]
 \caption{\itshape Raw sample throughput (samples/sec) across runtimes. \\ 
@@ -735,15 +725,9 @@ In a fork of Hear-C, I added the functionality to transpile WASM to WAMR AOT via
 
 Performance benchmarking in Section~\ref{sec:bench} demonstrates that WebAssembly (WASM) can support real-time audio DSP on embedded hardware under certain conditions, but further research is needed to determine the bounds of its performance. 
 
-Across the four tested algorithms, interpreter-based execution (\lstinline{wasmi}) did not achieve usable throughput and can be discarded as a runtime approach in future work. 
+Across the four tested algorithms, interpreter-based execution (\lstinline{wasmi}) did not achieve usable throughput and can be discarded as a runtime approach in future work. Ahead-of-time (AOT) compilation using WAMR and translation via \lstinline{wasm2c} both yielded viable performance for algorithms whose memory footprint is known at compile time, but demonstrated highly variable success with algorithms that do not. 
 
-Ahead-of-time (AOT) compilation using WAMR and translation via \lstinline{wasm2c} both yielded viable performance for algorithms whose memory footprint is known at compile time, but demonstrated highly variable success with algorithms that do not. 
-
-% For computationally moderate algorithms such as the FAUST reverb, relative performance remained within approximately 85–88 of native execution. This indicates that for many traditional white-box DSP designs, the abstraction penalty imposed by a WebAssembly layer can be bounded to an acceptable range.
-
-% Performance degradation became more pronounced for algorithms with higher computational density or more complex memory access patterns. The virtual analog Klon model and Neural Amp Modeler (NAM) exhibited significant slowdowns under WAMR AOT, with relative throughput dropping to 23\% and 7\% of native, respectively. The \lstinline{wasm2c} pipeline improved these figures, particularly for NAM (approximately 29\% of native), suggesting that translation to C followed by native ARM compilation better leverages the target compiler’s optimization passes.
-
-Two patterns are evident. First, runtime overhead is highly workload-dependent. Algorithms that rely heavily on floating-point arithmetic but maintain predictable control flow and limited dynamic allocation are more amenable to WASM deployment. Second, strategies that produce native machine code at flash time are markedly more suitable for real-time audio than runtime interpretation of bytecode.
+Two patterns are evident. First, strategies that produce native machine code at flash time are markedly more suitable for real-time audio than runtime interpretation of bytecode. Second, runtime overhead is highly workload-dependent. Algorithms that rely heavily on floating-point arithmetic but maintain predictable control flow and limited dynamic allocation are more amenable to WASM deployment.
 
 It is important to note that these measurements were obtained without aggressive runtime customization. Further opportunities for performance gains exist, including better leveraging of host-imported math intrinsics, improved compiler pipelines, and tighter ABI and runtime specialization. The results presented in this work therefore represent a lower bound on achievable performance.
 
@@ -759,11 +743,11 @@ A reasonable question remains: if real-time performance of WASM-based DSP module
 
 \section{ Conclusion }
 
-This work investigated the use of WebAssembly (WASM) as a hardware-agnostic intermediate representation for distributing audio DSP modules to embedded targets. By benchmarking three runtime strategies on a representative embedded platform, I have evaluated the practicality of WASM-based processing in resource-constrained audio systems.
+This paper documents investigation of WebAssembly (WASM) as a hardware-agnostic intermediate representation for distributing audio DSP modules to embedded targets. By benchmarking three execution strategies on a representative embedded platform and creating proof-of-concept developer tooling, I have evaluated the practicality of WASM-based processing in resource-constrained audio systems and presented an example workflow for development and distribution.
 
 Performance measurements indicate that interpreter-based execution is not suitable for real-time embedded DSP. However, approaches leveraging ahead-of-time (AOT) translation mechanisms demonstrate acceptable performance for a meaningful subset of audio algorithms. 
 
-These findings support the broader claim that a carefully specified WASM ABI for headless audio plugins could form the basis of a universal DSP distribution format, similar to that proposed in \cite{gaster2020audio}. Such a format would allow algorithms written in multiple programming languages to compile to a single intermediate representation and be uniformly deployed across embedded devices, desktop applications, and web platforms using appropriate runtimes.
+These findings support the broader claim that a carefully specified WASM ABI for audio plugins could form the basis of a universal DSP distribution format, similar to that proposed in \cite{gaster2020audio}. Such a format would allow algorithms written in multiple programming languages to compile to a single intermediate representation and be uniformly deployed across embedded devices, desktop applications, and web platforms using appropriate runtimes.
 
 The primary contributions of this work are: (1) the exploration of multiple execution strategies for WASM-based audio DSP modules, (2) empirical benchmarking of their relative performance on representative embedded hardware, and (3) creation of web-based developer tooling to facilitate their authoring and deployment. Future work will include refinement of a WASM ABI for audio plugins, further exploration of compiler and runtime optimizations, and evaluation on additional deployment targets.
 
