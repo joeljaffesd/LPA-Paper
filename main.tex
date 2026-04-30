@@ -317,7 +317,7 @@ For users, interoperability promotes sonic consistency. For example, an electric
 \caption{\label{DaisyOnline}{\it DaisyOnline, an online IDE for developing and deploying WebAssembly on the Daisy Seed}}
 \end{figure}
 
-The goal of this paper is to investigate means of targeting myriad deployments from one (non-source) distributable provided by audio developers, a \textit{universal distributable}. Such a deliverable can confer many advantages, but also carries with it some inherent downsides. Advantages include simplified build systems, easier porting of algorithms to new platforms, and greater interoperability between heterogeneous deployments. Downsides include performance degradation from the abstraction layer, increased complexity of debugging, and easier de-compilation. In this paper I have focused on deployment of such a universal distributable in embedded systems, as these resource-contained environments provide the greatest challenge in portability. If deployment to embedded systems proves feasible, then all other targets may follow suit with relative ease.
+The goal of this paper is to investigate means of targeting myriad deployments from one (non-source) distributable provided by audio developers, a \textit{universal distributable}. Such a deliverable can confer many advantages, but also carries with it some inherent downsides. Advantages include simplified build systems, easier porting of algorithms to new platforms, and greater interoperability between heterogeneous deployments. Downsides include performance degradation from the abstraction layer, increased complexity of debugging, and easier de-compilation. In this paper I have focused on deployment of such a universal distributable in embedded systems, as these resource-constrained environments provide the greatest challenge in portability. If deployment to embedded systems proves feasible, then all other targets may follow suit with relative ease.
 
 \subsection { Embedded Audio Systems }
 
@@ -489,7 +489,7 @@ While not explicitly related to plugins, researchers in \cite{lai2025audioreach}
 \section{ Performance Benchmarking }
 \label{sec:bench}
 
-To investigate the feasibility of WebAssembly (WASM) as a universal distributable for embedded audio applications, I have compiled four representative audio processing routines to WASM with a consistent binary interface using Emscripten\cite{emscripten} and measured execution time of each across three WASM runtimes on a resource contained target. For a baseline reference, I compiled and benchmarked each of the four routines as native ARM code as well via \lstinline{gcc-arm-none-eabi} invoked with an optimization level of \lstinline{-Ofast}.
+To investigate the feasibility of WebAssembly (WASM) as a universal distributable for embedded audio applications, I have compiled four representative audio processing routines to WASM with a consistent binary interface using Emscripten\cite{emscripten} and measured execution time of each across three WASM runtimes on a resource-constrained target. For a baseline reference, I compiled and benchmarked each of the four routines as native ARM code as well via \lstinline{gcc-arm-none-eabi} invoked with an optimization level of \lstinline{-Ofast}.
 
 % \begin{itemize}
 %   \item A FAUST spring reverb exported to C++
